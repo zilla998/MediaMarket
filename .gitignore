@@ -1,0 +1,51 @@
+# 1. Python-артефакты
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 2. Виртуальные окружения
+env/
+venv/
+.venv/
+ENV/
+.env/      # если вы храните .env с настройками локально
+
+# 3. Логи, отчёты тестов, кеши
+*.log
+*.pot
+*.mo
+htmlcov/
+.coverage
+.coverage.*
+.cache/
+nosetests.xml
+coverage.xml
+*,cover
+
+# 4. Сборки и пакеты
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 5. База данных
+db.sqlite3         # если вы используете SQLite для разработки
+*.sqlite3
+
+# 6. Медиа и статику, собираемую collectstatic
+media/             # пользовательские загрузки
+staticfiles/       # обычно выход collectstatic
+# исходники статики (app/static/) в git оставляйте
+
+# 7. Локальные настройки
+local_settings.py  # или любой другой файл с секретами
+
+# 8. IDE и редакторы
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# 9. ОС‑специфичные файлы
+.DS_Store
+Thumbs.db
