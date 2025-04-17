@@ -18,4 +18,3 @@ class CustomUser(AbstractUser):
     last_activity = models.DateTimeField(auto_now_add=True, verbose_name="Последняя активность")
     is_banned = models.BooleanField(default=False, verbose_name="Заблокирован ли пользователь")
     notes_admin = models.TextField(blank=True, null=True, verbose_name="Внутренние заметки админа")
-
