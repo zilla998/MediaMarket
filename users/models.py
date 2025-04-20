@@ -9,9 +9,9 @@ class CustomUser(AbstractUser):
         ("m", "male"),
         ("f", "female")
     )
-    phone = models.CharField(max_length=255, verbose_name="Номер телефона")
+    phone = models.CharField(validators=[phone_regex],max_length=255, verbose_name="Номер телефона")
     avatar = models.ImageField(upload_to="users_avatar/", blank=True, null=True, verbose_name="Аватар")
-    birth_date = models.DateField(validators=[phone_regex],blank=True, null=True, verbose_name="День рождения")
+    birth_date = models.DateField(blank=True, null=True, verbose_name="День рождения")
     gender = models.CharField(choices=choices, blank=True, null=True, verbose_name="Гендер")
     address_default = models.TextField(blank=True, null=True, verbose_name="Адрес")
     email_confirm = models.BooleanField(default=False, verbose_name="Подтверждение почты")
