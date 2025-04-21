@@ -32,6 +32,8 @@ dist/
 # 5. База данных
 db.sqlite3         # если вы используете SQLite для разработки
 *.sqlite3
+*.sqlite
+identifier.sqlite
 
 # 6. Медиа и статику, собираемую collectstatic
 media/             # пользовательские загрузки
