@@ -9,7 +9,7 @@ env/
 venv/
 .venv/
 ENV/
-.env/      # если вы храните .env с настройками локально
+.env/
 
 # 3. Логи, отчёты тестов, кеши
 *.log
@@ -30,18 +30,18 @@ dist/
 .eggs/
 
 # 5. База данных
-db.sqlite3         # если вы используете SQLite для разработки
+db.sqlite3
 *.sqlite3
 *.sqlite
 identifier.sqlite
 
 # 6. Медиа и статику, собираемую collectstatic
-media/             # пользовательские загрузки
-staticfiles/       # обычно выход collectstatic
+media/
+staticfiles/
 # исходники статики (app/static/) в git оставляйте
 
 # 7. Локальные настройки
-local_settings.py  # или любой другой файл с секретами
+local_settings.py
 
 # 8. IDE и редакторы
 .vscode/

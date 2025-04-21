@@ -1,0 +1,977 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="main">
+      <section class="section block-banner-shop">
+        <div class="container">
+          <h1 class="text-56-medium">Shop</h1>
+          <div class="breadcrumbs">
+            <ul>
+              <li> <a href="#">Home </a></li>
+              <li> <a href="#">Shop</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section block-content-shop">
+        <div class="container">
+          <div class="box-filter-top box-filter-top-style3">
+            <div class="box-filters d-none d-lg-block">
+              <ul class="list-category">
+                <li class="active"> <a href="#">All</a></li>
+                <li> <a href="#">Mens</a></li>
+                <li> <a href="#">Womens</a></li>
+                <li> <a href="#">Kids</a></li>
+                <li> <a href="#">Gifts                </a></li>
+              </ul>
+            </div>
+            <div class="box-sort"> <a class="btn-open-filter btn-open-filter-click" href="#">Filter </a>
+              <div class="box-sortby d-flex align-items-center">
+                <div class="dropdown dropdown-sort">
+                  <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">Default Sorting</button>
+                  <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort" style="margin: 0px;">
+                    <li><a class="dropdown-item active" href="#">Default Sorting</a></li>
+                    <li><a class="dropdown-item" href="#">Oldest products</a></li>
+                    <li><a class="dropdown-item" href="#">Comments products </a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="box-view-style"> <a class="view-type view-2" href="#" data-col="2"></a><a class="view-type view-3 active" href="#" data-col="3"></a><a class="view-type view-4" href="#" data-col="4"></a><a class="view-type view-5" href="#" data-col="5"></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper-overlay"></div>
+        <div class="block-filter-middle block-filter-canvas wrapper-popup">
+          <div class="container">
+            <div class="box-filters-sidebar">
+              <h5 class="title-filter">Filter</h5>
+              <div class="block-filter">
+                <h6 class="item-collapse">Categories</h6>
+                <div class="box-collapse scrollFilter">
+                  <ul class="list-filter-checkbox">
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Womens <span class="neutral-medium">(12)</span></span><span class="checkmark"></span>
+                      </label><span class="arrow-down"></span>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Mens <span class="neutral-medium">(9)</span></span><span class="checkmark"></span>
+                      </label><span class="arrow-down"></span>
+                      <ul>
+                        <li>
+                          <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Hats<span class="neutral-medium">(4)</span></span><span class="checkmark"></span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Glasses <span class="neutral-medium">(3)</span></span><span class="checkmark"></span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Jeans<span class="neutral-medium">(2)</span></span><span class="checkmark"></span>
+                          </label>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Kids <span class="neutral-medium">(15)</span></span><span class="checkmark"></span>
+                      </label><span class="arrow-down"></span>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Gifts <span class="neutral-medium">(10)</span></span><span class="checkmark"></span>
+                      </label><span class="arrow-down"></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="block-filter">
+                <h6 class="item-collapse">Colors </h6>
+                <div class="box-collapse scrollFilter">
+                  <ul class="list-colors">
+                    <li class="active">
+                      <div class="box-colors">
+                        <div class="item-color color-4"></div>
+                        <label>Blue</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="box-colors">
+                        <div class="item-color color-3"></div>
+                        <label>Grey</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="box-colors">
+                        <div class="item-color color-5"></div>
+                        <label>Red</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="box-colors">
+                        <div class="item-color color-6"></div>
+                        <label>Yellow</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="block-filter">
+                <h6 class="item-collapse">Size </h6>
+                <div class="box-collapse scrollFilter">
+                  <div class="block-size">
+                    <div class="list-sizes"><span class="item-size">XS </span><span class="item-size active">S </span><span class="item-size">M </span><span class="item-size">XL </span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-filter">
+                <h6 class="item-collapse">Brand </h6>
+                <div class="box-collapse scrollFilter">
+                  <ul class="list-filter-checkbox">
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Adidas</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Chloe</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Kendo</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Nike</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">Adidas</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="block-filter">
+                <h6 class="item-collapse">Price </h6>
+                <div class="box-collapse scrollFilter">
+                  <ul class="list-filter-checkbox">
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">$10.00 - $49.00</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">$50.00 - $99.00</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">$100.00 - $199.00</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="cb-container">
+                        <input type="checkbox"><span class="text-small">$200.00 +</span><span class="checkmark"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="box-your-filter box-your-filter-shop2">
+            <div class="block-text-filter"><span class="body-p2 neutral-medium-dark">Your filter</span></div>
+            <div class="block-ele-filter"><a class="btn btn-tag-filter" href="#">XS<span class="close-tag"></span></a><a class="btn btn-tag-filter" href="#">Women<span class="close-tag"></span></a><a class="clear-filter link-underline" href="#">Clear All</a></div>
+          </div>
+          <div class="box-list-products box-list-products-4 box-list-products-shop-2">
+              {% for product in products %}
+            <div class="product-item">
+              <div class="cardProduct wow fadeInUp">
+                <div class="cardImage"><a href="{% url "products:product_detail" product.pk %}"><img class="imageMain" src="{{ product.image.url }}" alt="guza"><img class="imageHover" src="assets/imgs/page/homepage1/product1-hover.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="{% url "products:product_detail" product.pk %}">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo"><a href="#">
+                    <h6 class="text-16-medium cardTitle">{{ product.name }}</h6></a>
+                  <p class="body-p2 cardDesc">₽{{ product.price }}</p>
+
+                </div>
+              </div>
+            </div>
+{% endfor %}
+
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 mb-30">
+              <h5 class="color-white mb-20">Receive an exclusive<span class="tone-red">20%</span><br class="d-none d-md-block">discount code when you<br class="d-none d-md-block">signup.</h5>
+              <div class="box-form-subscribe box-form-subscribe-white">
+                <form class="form-sub" action="#" method="POST">
+                  <input class="form-control" type="text" placeholder="Enter your email">
+                  <input class="btn btn-subscribe" type="submit" value="Subscribe">
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-8 mb-30">
+              <div class="row">
+                <div class="col-lg-3 mb-30 footerBorder">
+                  <h6 class="color-white mb-20">Company</h6>
+                  <ul class="menu-footer">
+                    <li><a href="about-us-1.html">About us</a></li>
+                    <li><a href="carrers.html">Careers</a></li>
+                    <li><a href="store-location.html">Store Locator</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3 mb-30 footerBorder">
+                  <h6 class="color-white mb-20">Customer Care</h6>
+                  <ul class="menu-footer">
+                    <li><a href="about-us-1.html">Size Guide</a></li>
+                    <li><a href="team.html">Help & FAQs</a></li>
+                    <li><a href="career.html">Return My Order</a></li>
+                    <li><a href="#">Refer a Friend</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3 mb-30 footerBorder">
+                  <h6 class="color-white mb-20">Terms & Policies</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">Duties & Taxes</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms Conditions</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-3 mb-30 footerBorder">
+                  <h6 class="color-white mb-20">Follow Us</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Tiktok</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-2">
+        <div class="container">
+          <div class="footer-bottom">
+            <div class="row align-items-center">
+              <div class="col-lg-6 col-md-12 text-center text-lg-start mb-20"><img class="mr-25 d-inline-block align-middle logo-footer-img" src="assets/imgs/template/logo-light.svg" alt="Guza"><span class="body-p1 color-white d-inline-block align-middle">© 2023 Guza.Co. All rights reserved</span></div>
+              <div class="col-lg-6 col-md-12 text-center text-lg-end mb-20">
+                <div class="d-flex justify-content-center justify-content-lg-end align-items-center box-all-payments">
+                  <div class="d-inline-block box-payments mr-20"><img src="assets/imgs/template/icons/visa.svg" alt="Guza"><img src="assets/imgs/template/icons/master.svg" alt="Guza"><img src="assets/imgs/template/icons/stripe.svg" alt="Guza"><img src="assets/imgs/template/icons/paypal.svg" alt="Guza"></div>
+                  <div class="dropdown mr-20">
+                    <button class="btn btn-line-bottom dropdown-toggle" id="dropdownLang" type="button" data-bs-toggle="dropdown" aria-expanded="false">EN</button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownLang">
+                      <li><a class="dropdown-item" href="#">EN</a></li>
+                      <li><a class="dropdown-item" href="#">JP</a></li>
+                      <li><a class="dropdown-item" href="#">KR</a></li>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-line-bottom dropdown-toggle" id="dropdownCurrency" type="button" data-bs-toggle="dropdown" aria-expanded="false">USD</button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownCurrency">
+                      <li><a class="dropdown-item" href="#">USD</a></li>
+                      <li><a class="dropdown-item" href="#">EURO</a></li>
+                      <li><a class="dropdown-item" href="#">AUD</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="box-popup-preview"><a class="btn-close-popup" href="#"><img src="assets/imgs/template/icons/close-popup.svg" alt="kidify"></a>
+      <div class="box-popup-content">
+        <div class="preview-product-image">
+          <div class="detail-gallery detail-gallery-2">
+            <div class="box-main-gallery"><a class="zoom-image glightbox" href="assets/imgs/page/product/img.png"></a>
+              <div class="product-image-slider product-image-slider-preview">
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+                <figure class="border-radius-10"><a class="glightbox" href="assets/imgs/page/product/img.png"><img src="assets/imgs/page/product/img.png" alt="kidify"></a></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-product-info">
+          <div class="box-product-info">
+            <h3 class="mb-5">Summer Stripes Shorts</h3>
+            <div class="block-rating"><img src="assets/imgs/template/icons/star-fill.svg" alt="Guza"><img src="assets/imgs/template/icons/star-fill.svg" alt="Guza"><img src="assets/imgs/template/icons/star-fill.svg" alt="Guza"><img src="assets/imgs/template/icons/star-fill.svg" alt="Guza"><img src="assets/imgs/template/icons/star-none.svg" alt="Guza"><span class="text-17 neutral-medium-dark">(5)</span></div>
+            <div class="block-price"><span class="price-main">$15.00</span><span class="price-line">$25.00</span></div>
+            <p class="body-p2 viewed-guest viewed-guest-black mb-25"><span class="text-17-medium">24 guests are viewing this product</span></p>
+            <div class="block-description">
+              <p class="body-p2 neutral-medium-dark">The shorts are made from soft organic cotton. They have an elasticated waistband with an internal drawstring and side pockets.</p>
+            </div>
+            <div class="block-quantity">
+              <div class="text-17 neutral-medium-dark mb-10">Quantity</div>
+              <div class="box-form-cart">
+                <div class="form-cart detail-qty"><span class="minus"></span>
+                  <input class="qty-val form-control" type="text" name="quantity" value="1" min="1"><span class="plus"></span>
+                </div><a class="btn btn-black" href="#">Add to Cart</a><a class="btn btn-navy" href="#">Buy Now</a>
+              </div>
+            </div>
+            <div class="block-tags-product">
+              <p class="body-p2"><span class="neutral-medium-dark">SKU:</span><span class="neutral-dark">C66R8B47MP</span></p>
+              <p class="body-p2"><span class="neutral-medium-dark">Categories:</span><a class="neutral-dark" href="#">Dress,</a><a class="neutral-dark" href="#">Pants</a></p>
+              <p class="body-p2"><span class="neutral-medium-dark">Tags:</span><a class="neutral-dark" href="#">fashion,</a><a class="neutral-dark" href="#">shoes,</a><a class="neutral-dark" href="#">women</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-popup-search ele-popup-search">
+      <div class="box-search-overlay"></div>
+      <div class="box-search-wrapper"><a class="btn-close-popup" href="#">
+          <svg class="icon-16 d-inline-flex align-items-center justify-content-center" fill="#111111" stroke="#111111" width="24" height="24" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg></a>
+        <h5 class="mb-15">Search products</h5>
+        <form action="#">
+          <div class="form-group">
+            <select class="form-control arrow-select">
+              <option>All Categories</option>
+              <option>Animals & Pet Supplies</option>
+              <option>Baby & Toddler</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input class="form-control search-icon" type="text">
+          </div>
+        </form>
+        <div class="box-quick-search"><span class="text-17 neutral-medium-dark">Quick search:</span><a class="text-17" href="#">T-Shirt</a><a class="text-17" href="#">Jeans</a><a class="text-17" href="#">Mens</a></div>
+        <div class="box-products-search">
+          <h6 class="text-18-medium mb-10">You May Also Like</h6>
+          <div class="box-list-product-search">
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-1.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-5.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">illow Covers Luxury</h6>
+                  <p class="body-p2 cardDesc">$24.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-2.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-6.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Pillow Covers Linen</h6>
+                  <p class="body-p2 cardDesc">$36.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-3.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-7.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Pillow Cushion</h6>
+                  <p class="body-p2 cardDesc">$27.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-4.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-8.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Pillow Covers Linen</h6>
+                  <p class="body-p2 cardDesc">$98.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-popup-account">
+      <div class="box-account-overlay"></div>
+      <div class="box-account-wrapper"><a class="btn-close-popup btn-close-popup-account" href="#">
+          <svg class="icon-16 d-inline-flex align-items-center justify-content-center" fill="#111111" stroke="#111111" width="24" height="24" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg></a>
+        <div class="form-account-info"><a class="button-tab btn-for-login active" href="#">Login</a><a class="button-tab btn-for-signup" href="#">Sign up</a>
+          <div class="form-login">
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" placeholder="Password">
+            </div>
+            <div class="form-group"><a class="link-under buttun-forgotpass" href="#">Forgot your password?</a></div>
+            <div class="form-group">
+              <button class="btn btn-black d-block">Login</button>
+            </div>
+          </div>
+          <div class="form-register">
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="First Name">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label class="d-flex align-items-start">
+                <input class="cb-agree" type="checkbox"><span class="text-agree body-p2">Join for Free and start earning points today. Benefits include 15% off your first purchase,</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-black d-block">Create my account</button>
+            </div>
+            <div class="text-center">
+              <p class="body-p2 neutral-medium-dark">Already have an account?<a class="neutral-dark login-now" href="#">Login Now</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="form-password-info">
+          <h5>Recover password</h5>
+          <div class="form-login">
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-black d-block">Recover</button>
+            </div>
+            <div class="text-center">
+              <p class="body-p2 neutral-medium-dark">Already have an account?<a class="neutral-dark login-now" href="#">Login Now</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-popup-cart">
+      <div class="box-cart-overlay"></div>
+      <div class="box-cart-wrapper"><a class="btn-close-popup" href="#">
+          <svg class="icon-16 d-inline-flex align-items-center justify-content-center" fill="#111111" stroke="#111111" width="24" height="24" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg></a>
+        <h5 class="mb-15">Your Cart (2)</h5>
+        <p class="body-p2"><span class="text-17-medium">Free Shipping</span>on orders over<span class="text-17-medium">$200.00</span></p>
+        <div class="box-progress-bar-block">
+          <div class="progress">
+            <div class="progress-bar" style="width: 35%"></div>
+          </div>
+        </div>
+        <div class="box-products-cart">
+          <div class="box-empty-cart d-none">
+            <div class="icon-empty-cart"><img src="assets/imgs/template/icons/empty-cart.svg" alt="Guza"></div>
+            <div class="info-empty-cart">
+              <p class="text-17 neutral-medium-dark">Your cart is empty</p><a class="link-underline" href="#">Add from Wishlist</a>
+            </div>
+          </div>
+          <div class="list-items-cart">
+            <div class="item-cart">
+              <div class="item-cart-image"><img src="assets/imgs/page/cart/sp.png" alt="Guza"></div>
+              <div class="item-cart-info">
+                <div class="item-cart-info-1"><a class="text-16-medium" href="#">Ball Crew Shirt</a>
+                  <div class="box-info-size-color-product">
+                    <p class="box-color"><span class="body-p2 neutral-medium-dark">Color:</span><span class="body-p2 neutral-dark">Navy</span></p>
+                    <p class="box-size"><span class="body-p2 neutral-medium-dark">Size:</span><span class="body-p2 neutral-dark">S</span></p>
+                  </div>
+                  <p class="body-p2 d-block d-sm-none mb-8">$24.00</p>
+                  <div class="box-form-cart">
+                    <div class="form-cart detail-qty"><span class="minus"></span>
+                      <input class="qty-val form-control" type="text" name="quantity" value="1" min="1"><span class="plus"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-cart-info-2">
+                  <p class="body-p2 d-none d-sm-block">$24.00</p><a class="btn-remove-cart" href="#"></a>
+                </div>
+              </div>
+            </div>
+            <div class="item-cart">
+              <div class="item-cart-image"><img src="assets/imgs/page/cart/sp2.png" alt="Guza"></div>
+              <div class="item-cart-info">
+                <div class="item-cart-info-1"><a class="text-16-medium" href="#">Ball Crew Shirt</a>
+                  <div class="box-info-size-color-product">
+                    <p class="box-color"><span class="body-p2 neutral-medium-dark">Color:</span><span class="body-p2 neutral-dark">Navy</span></p>
+                    <p class="box-size"><span class="body-p2 neutral-medium-dark">Size:</span><span class="body-p2 neutral-dark">S</span></p>
+                  </div>
+                  <p class="body-p2 d-block d-sm-none mb-8">$24.00</p>
+                  <div class="box-form-cart">
+                    <div class="form-cart detail-qty"><span class="minus"></span>
+                      <input class="qty-val form-control" type="text" name="quantity" value="1" min="1"><span class="plus"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-cart-info-2">
+                  <p class="body-p2 d-none d-sm-block">$24.00</p><a class="btn-remove-cart" href="#"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-products-search">
+          <h6 class="text-18-medium mb-20">You May Also Like</h6>
+          <div class="box-list-product-search">
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/shop1/sp.png" alt="guza"><img class="imageHover" src="assets/imgs/page/shop1/sp.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Ball Crew Shirt</h6>
+                  <p class="body-p2 cardDesc">$35.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/shop1/sp2.png" alt="guza"><img class="imageHover" src="assets/imgs/page/shop1/sp2.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Ball Crew Shirt</h6>
+                  <p class="body-p2 cardDesc">$35.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-fire">
+          <div class="icon-fire body-p2">Checkout now 09:14 before they’re<span class="text-17-medium">GONE!</span></div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between mt-25 mb-15">
+          <h6 class="neutral-medium-dark">Subtotal</h6>
+          <h6 class="neutral-dark">$59.00</h6>
+        </div>
+        <div class="box-button-popup-cart d-flex align-items-center justify-content-between"><a class="btn btn-border w-100 mr-5" href="cart.html">View Cart</a><a class="btn btn-black w-100 ml-5" href="checkout.html">Check Out</a></div>
+      </div>
+    </div>
+    <div class="box-popup-wishlist">
+      <div class="box-wishlist-overlay"></div>
+      <div class="box-wishlist-wrapper"><a class="btn-close-popup" href="#">
+          <svg class="icon-16 d-inline-flex align-items-center justify-content-center" fill="#111111" stroke="#111111" width="24" height="24" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg></a>
+        <h5 class="mb-15">Your Wishlist</h5>
+        <div class="box-products-cart">
+          <div class="box-empty-cart d-none">
+            <div class="icon-empty-cart"><img src="assets/imgs/template/icons/empty-cart.svg" alt="Guza"></div>
+            <div class="info-empty-cart">
+              <p class="text-17 neutral-medium-dark">Your cart is empty</p><a class="link-underline" href="#">Add from Wishlist</a>
+            </div>
+          </div>
+          <div class="list-items-cart">
+            <div class="item-cart">
+              <div class="item-cart-image"><img src="assets/imgs/page/cart/sp.png" alt="Guza"></div>
+              <div class="item-cart-info">
+                <div class="item-cart-info-1"><a class="text-16-medium" href="#">Ball Crew Shirt</a>
+                  <div class="box-info-size-color-product">
+                    <p class="box-color"><span class="body-p2 neutral-medium-dark">Color:</span><span class="body-p2 neutral-dark">Navy</span></p>
+                    <p class="box-size"><span class="body-p2 neutral-medium-dark">Size:</span><span class="body-p2 neutral-dark">S</span></p>
+                  </div>
+                  <p class="body-p2 d-block d-sm-none mb-8">$24.00</p>
+                  <div class="box-form-cart">
+                    <div class="btn btn-black">Add to cart</div>
+                  </div>
+                </div>
+                <div class="item-cart-info-2">
+                  <p class="body-p2 d-none d-sm-block">$24.00</p><a class="btn-remove-cart" href="#"></a>
+                </div>
+              </div>
+            </div>
+            <div class="item-cart">
+              <div class="item-cart-image"><img src="assets/imgs/page/cart/sp2.png" alt="Guza"></div>
+              <div class="item-cart-info">
+                <div class="item-cart-info-1"><a class="text-16-medium" href="#">Ball Crew Shirt</a>
+                  <div class="box-info-size-color-product">
+                    <p class="box-color"><span class="body-p2 neutral-medium-dark">Color:</span><span class="body-p2 neutral-dark">Navy</span></p>
+                    <p class="box-size"><span class="body-p2 neutral-medium-dark">Size:</span><span class="body-p2 neutral-dark">S</span></p>
+                  </div>
+                  <p class="body-p2 d-block d-sm-none mb-8">$24.00</p>
+                  <div class="box-form-cart">
+                    <div class="btn btn-black">Add to cart</div>
+                  </div>
+                </div>
+                <div class="item-cart-info-2">
+                  <p class="body-p2 d-none d-sm-block">$24.00</p><a class="btn-remove-cart" href="#"></a>
+                </div>
+              </div>
+            </div>
+            <div class="item-cart">
+              <div class="item-cart-image"><img src="assets/imgs/page/cart/sp3.png" alt="Guza"></div>
+              <div class="item-cart-info">
+                <div class="item-cart-info-1"><a class="text-16-medium" href="#">Ball Crew Shirt</a>
+                  <div class="box-info-size-color-product">
+                    <p class="box-color"><span class="body-p2 neutral-medium-dark">Color:</span><span class="body-p2 neutral-dark">Navy</span></p>
+                    <p class="box-size"><span class="body-p2 neutral-medium-dark">Size:</span><span class="body-p2 neutral-dark">S</span></p>
+                  </div>
+                  <p class="body-p2 d-block d-sm-none mb-8">$24.00</p>
+                  <div class="box-form-cart">
+                    <div class="btn btn-black">Add to cart</div>
+                  </div>
+                </div>
+                <div class="item-cart-info-2">
+                  <p class="body-p2 d-none d-sm-block">$24.00</p><a class="btn-remove-cart" href="#"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-products-search">
+          <h6 class="text-18-medium mb-10">You May Also Like</h6>
+          <div class="box-list-product-search">
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-1.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-5.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">illow Covers Luxury</h6>
+                  <p class="body-p2 cardDesc">$24.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-product-search">
+              <div class="cardProductStyle3 cardProductType03 cardProductType02 wow fadeInUp">
+                <div class="cardImage"><a href="#"><img class="imageMain" src="assets/imgs/page/popup/product-2.png" alt="guza"><img class="imageHover" src="assets/imgs/page/popup/product-6.png" alt="guza"></a>
+                  <div class="button-select"><a href="#">Select Options</a></div>
+                  <div class="box-quick-button"><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_116_452)">
+                          <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_116_452">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_200_1102)">
+                          <path d="M15.375 12.0416L19.5 16.1666L15.375 20.2916L14.1967 19.1133L16.31 16.9991L5.33333 17V15.3333H16.31L14.1967 13.22L15.375 12.0416ZM8.625 3.70831L9.80333 4.88665L7.69 6.99998H18.6667V8.66665H7.69L9.80333 10.78L8.625 11.9583L4.5 7.83331L8.625 3.70831Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_200_1102">
+                            <rect width="20" height="20" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a><a class="btn preview-product" href="#">
+                      <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" fill="" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_91_73)">
+                          <path d="M20.031 18.617L24.314 22.899L22.899 24.314L18.617 20.031C17.0237 21.3082 15.042 22.0029 13 22C8.032 22 4 17.968 4 13C4 8.032 8.032 4 13 4C17.968 4 22 8.032 22 13C22.0029 15.042 21.3082 17.0237 20.031 18.617ZM18.025 17.875C19.2941 16.5699 20.0029 14.8204 20 13C20 9.132 16.867 6 13 6C9.132 6 6 9.132 6 13C6 16.867 9.132 20 13 20C14.8204 20.0029 16.5699 19.2941 17.875 18.025L18.025 17.875Z" fill=""></path>
+                        </g>
+                        <defs>
+                          <clippath id="clip0_91_73">
+                            <rect width="24" height="24" fill="white" transform="translate(2 2)"></rect>
+                          </clippath>
+                        </defs>
+                      </svg></a></div>
+                </div>
+                <div class="cardInfo">
+                  <h6 class="text-16-medium">Pillow Covers Linen</h6>
+                  <p class="body-p2 cardDesc">$36.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/vendors/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/jquery-3.7.0.min.js"></script>
+    <script src="assets/js/vendors/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/waypoints.js"></script>
+    <script src="assets/js/vendors/wow.js"></script>
+    <script src="assets/js/vendors/magnific-popup.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/isotope.js"></script>
+    <script src="assets/js/vendors/swiper-bundle.min.js"></script>
+    <script src="assets/js/vendors/counterup.js"></script>
+    <script src="assets/js/vendors/jquery.countdown.min.js"></script>
+    <script src="assets/js/vendors/slick.js"></script>
+    <script src="assets/js/vendors/jquery.timepicker.min.js"></script>
+    <script src="assets/js/vendors/glightbox.min.js"></script>
+    <script src="assets/js/main.js?v=1.0.0"></script>
+  </body>
+</html>
+{% endblock %}

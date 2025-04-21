@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row justify-content-center mt-5">
-    <div class="col-md-6 col-lg-5">
+    <div class="col-md-8 col-lg-6">
         <div class="card shadow">
             <div class="card-header bg-dark text-white text-center py-3">
                 <h3 class="mb-0">Авторизация</h3>
@@ -10,13 +10,16 @@
             <div class="card-body p-4">
                 <form method="post">
                     {% csrf_token %}
-                    
+
                     {% for field in form %}
                     <div class="mb-3">
                         <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                         <div class="form-control-wrapper">
                             {{ field }}
                         </div>
+                        {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
                         {% if field.errors %}
                         <div class="text-danger mt-1">
                             {% for error in field.errors %}
@@ -26,13 +29,9 @@
                         {% endif %}
                     </div>
                     {% endfor %}
-                    
+
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-dark btn-lg">Войти</button>
-                    </div>
-                    
-                    <div class="text-center mt-3">
-                        <a href="{% url 'users:recover-password' %}" class="text-decoration-none">Забыли пароль?</a>
                     </div>
                 </form>
             </div>
@@ -42,4 +41,27 @@
         </div>
     </div>
 </div>
+
+<style>
+    form input, form select, form textarea {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+</style>
 {% endblock %}
+
