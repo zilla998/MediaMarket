@@ -3,7 +3,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light py-3">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{% url "products:homepage"%}">
           <img alt="MediaMarket" src="{% static 'assets/imgs/template/logo.svg' %}" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -13,10 +13,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Главная</a>
+              <a class="nav-link active" aria-current="page" href="{% url "products:homepage"%}">Главная</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/products/">Каталог</a>
+              <a class="nav-link" href="{% url "products:products_list" %}">Каталог</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -45,8 +45,8 @@
             </div>
           </form>
           <div class="d-flex align-items-center">
-            <a href="{% url 'users:login' %}" class="btn btn-outline-dark me-2">Вход</a>
-            <a href="{% url 'users:register' %}" class="btn btn-dark me-2">Регистрация</a>
+            <a href="{% url 'users:login' %}" class="btn btn-outline-dark me-3 px-3">Вход</a>
+            <a href="{% url 'users:register' %}" class="btn btn-dark me-3 px-3">Регистрация</a>
             <a class="position-relative me-3" href="/wishlist/" title="Избранное">
               <svg width="24" height="24" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.001 6.52898C16.35 4.41998 19.98 4.48998 22.243 6.75698C24.505 9.02498 24.583 12.637 22.479 14.993L13.999 23.485L5.52101 14.993C3.41701 12.637 3.49601 9.01898 5.75701 6.75698C8.02201 4.49298 11.645 4.41698 14.001 6.52898ZM20.827 8.16998C19.327 6.66798 16.907 6.60698 15.337 8.01698L14.002 9.21498L12.666 8.01798C11.091 6.60598 8.67601 6.66798 7.17201 8.17198C5.68201 9.66198 5.60701 12.047 6.98001 13.623L14 20.654L21.02 13.624C22.394 12.047 22.319 9.66498 20.827 8.16998Z"></path>

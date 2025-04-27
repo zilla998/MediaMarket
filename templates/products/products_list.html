@@ -28,11 +28,11 @@
             <div class="box-sort"> <a class="btn-open-filter btn-open-filter-click" href="#">Filter </a>
               <div class="box-sortby d-flex align-items-center">
                 <div class="dropdown dropdown-sort">
-                  <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">Default Sorting</button>
+                  <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">Сортировка</button>
                   <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort" style="margin: 0px;">
-                    <li><a class="dropdown-item active" href="#">Default Sorting</a></li>
-                    <li><a class="dropdown-item" href="#">Oldest products</a></li>
-                    <li><a class="dropdown-item" href="#">Comments products </a></li>
+                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_asc">Цена ↑</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_desc">Цена ↓</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=date">Новинки</a></li>
                   </ul>
                 </div>
               </div>
@@ -305,7 +305,7 @@
         <div class="container">
           <div class="footer-bottom">
             <div class="row align-items-center">
-              <div class="col-lg-6 col-md-12 text-center text-lg-start mb-20"><img class="mr-25 d-inline-block align-middle logo-footer-img" src="assets/imgs/template/logo-light.svg" alt="Guza"><span class="body-p1 color-white d-inline-block align-middle">© 2023 Guza.Co. All rights reserved</span></div>
+              <div class="col-lg-6 col-md-12 text-center text-lg-start mb-20"><img class="mr-25 d-inline-block align-middle logo-footer-img" src="assets/imgs/template/logo-light.svg" alt="Guza"><span class="body-p1 color-white d-inline-block align-middle"> 2023 Guza.Co. All rights reserved</span></div>
               <div class="col-lg-6 col-md-12 text-center text-lg-end mb-20">
                 <div class="d-flex justify-content-center justify-content-lg-end align-items-center box-all-payments">
                   <div class="d-inline-block box-payments mr-20"><img src="assets/imgs/template/icons/visa.svg" alt="Guza"><img src="assets/imgs/template/icons/master.svg" alt="Guza"><img src="assets/imgs/template/icons/stripe.svg" alt="Guza"><img src="assets/imgs/template/icons/paypal.svg" alt="Guza"></div>

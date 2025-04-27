@@ -6,7 +6,7 @@ from products.models import Product, Category, CartItem, Favorite, Order, OrderI
 # Register your models here.
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'in_stock')
+    list_display = ('name', 'price', 'in_stock', 'create_at')
 
 
 @admin.register(Category)
