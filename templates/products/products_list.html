@@ -4,11 +4,11 @@
     <main class="main">
       <section class="section block-banner-shop">
         <div class="container">
-          <h1 class="text-56-medium">Shop</h1>
+          <h1 class="text-56-medium">Каталог</h1>
           <div class="breadcrumbs">
             <ul>
-              <li> <a href="#">Home </a></li>
-              <li> <a href="#">Shop</a></li>
+              <li> <a href="{% url 'products:homepage' %}">Главная </a></li>
+              <li> <a href="{% url 'products:products_list' %}">Каталог </a></li>
             </ul>
           </div>
         </div>
@@ -18,21 +18,21 @@
           <div class="box-filter-top box-filter-top-style3">
             <div class="box-filters d-none d-lg-block">
               <ul class="list-category">
-                <li class="active"> <a href="#">All</a></li>
-                <li> <a href="#">Mens</a></li>
-                <li> <a href="#">Womens</a></li>
-                <li> <a href="#">Kids</a></li>
-                <li> <a href="#">Gifts                </a></li>
+                <li class="active"> <a href="#">Все товары</a></li>
+                <li> <a href="#">Электроника</a></li>
+                <li> <a href="#">Бытовые товары</a></li>
+                <li> <a href="#">Детские товары</a></li>
+                <li> <a href="#">Подарки</a></li>
               </ul>
             </div>
-            <div class="box-sort"> <a class="btn-open-filter btn-open-filter-click" href="#">Filter </a>
+            <div class="box-sort"> <a class="btn-open-filter btn-open-filter-click" href="#">Фильтр </a>
               <div class="box-sortby d-flex align-items-center">
                 <div class="dropdown dropdown-sort">
                   <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">Сортировка</button>
                   <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort" style="margin: 0px;">
-                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_asc">Цена ↑</a></li>
-                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_desc">Цена ↓</a></li>
                     <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=date">Новинки</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_desc">Цена ↓</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_asc">Цена ↑</a></li>
                   </ul>
                 </div>
               </div>
@@ -44,9 +44,9 @@
         <div class="block-filter-middle block-filter-canvas wrapper-popup">
           <div class="container">
             <div class="box-filters-sidebar">
-              <h5 class="title-filter">Filter</h5>
+              <h5 class="title-filter">Фильтр</h5>
               <div class="block-filter">
-                <h6 class="item-collapse">Categories</h6>
+                <h6 class="item-collapse">Категории</h6>
                 <div class="box-collapse scrollFilter">
                   <ul class="list-filter-checkbox">
                     <li>
@@ -192,8 +192,8 @@
         </div>
         <div class="container">
           <div class="box-your-filter box-your-filter-shop2">
-            <div class="block-text-filter"><span class="body-p2 neutral-medium-dark">Your filter</span></div>
-            <div class="block-ele-filter"><a class="btn btn-tag-filter" href="#">XS<span class="close-tag"></span></a><a class="btn btn-tag-filter" href="#">Women<span class="close-tag"></span></a><a class="clear-filter link-underline" href="#">Clear All</a></div>
+            <div class="block-text-filter"><span class="body-p2 neutral-medium-dark">Ваш фильтр</span></div>
+            <div class="block-ele-filter"><a class="btn btn-tag-filter" href="#">XS<span class="close-tag"></span></a><a class="btn btn-tag-filter" href="#">Women<span class="close-tag"></span></a><a class="clear-filter link-underline" href="#">Очистить</a></div>
           </div>
           <div class="box-list-products box-list-products-4 box-list-products-shop-2">
               {% for product in products %}

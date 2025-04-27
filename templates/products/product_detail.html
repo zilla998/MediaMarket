@@ -49,7 +49,7 @@
                       <li><a href="index-34.html">Jeans</a></li>
                     </ul>
                   </li>
-                  <li class="has-children"><a href="#">Shop</a>
+                  <li class="has-children"><a href="#">Каталог</a>
                     <ul class="sub-menu">
                       <li><a href="shop-left-filter.html">Shop - Left Filter</a></li>
                       <li><a href="shop-top-filter.html">Shop - Top Filter</a></li>
@@ -130,10 +130,10 @@
         <div class="container">
           <div class="breadcrumbs">
             <ul>
-              <li> <a href="#">Home </a></li>
-              <li> <a href="#">Shop</a></li>
-              <li> <a href="#">Women </a></li>
-              <li> <a href="#">{{ product.name }}</a></li>
+              <li> <a href="{% url 'products:homepage' %}">Главная </a></li>
+              <li> <a href="{% url 'products:products_list' %}">Каталог </a></li>
+              <li> <a href="#">{{ product.category }} </a></li>
+              <li> <a href="#">{{ product.name }} </a></li>
             </ul>
           </div>
         </div>
