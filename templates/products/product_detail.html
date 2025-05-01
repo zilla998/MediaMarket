@@ -132,7 +132,7 @@
             <ul>
               <li> <a href="{% url 'products:homepage' %}">Главная </a></li>
               <li> <a href="{% url 'products:products_list' %}">Каталог </a></li>
-              <li> <a href="#">{{ product.category }} </a></li>
+              <li> <a href="{% url 'products:products_list' %}">{{ product.category }} </a></li>
               <li> <a href="#">{{ product.name }} </a></li>
             </ul>
           </div>

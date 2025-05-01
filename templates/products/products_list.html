@@ -202,7 +202,7 @@
             <div class="product-item">
               <div class="cardProduct wow fadeInUp">
                 <div class="cardImage"><a href="{% url "products:product_detail" product.pk %}"><img class="imageMain" src="{{ product.image.url }}" alt="guza"><img class="imageHover" src="{% static 'assets/imgs/template/mondragon-corporacion.svg' %}" alt="guza"></a>
-                  <div class="button-select"><a href="#">Выбрать комплектацию</a></div>
+                  <div class="button-select"><a href="{% url "products:product_detail" product.pk %}">Выбрать комплектацию</a></div>
                   <div class="box-quick-button"><a class="btn" href="#">
                       <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_116_452)">
