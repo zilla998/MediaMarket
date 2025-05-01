@@ -3,10 +3,14 @@ from django.shortcuts import render
 from .models import Product
 
 
-
 def homepage(request):
     return render(request, "homepage.html", {
         "title": "Главная страница"
+    })
+
+def about_us(request):
+    return render(request, "about_us.html", {
+        "title": "О нас"
     })
 
 
