@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.dispatch import receiver
+from django.contrib.auth.signals import user_logged_in
 
-from .models import Product
+from .models import Product, CartItem
 
+
+@receiver(user_logged_in)
+def test_reciver(**kwargs):
+    print("OK")
 
 def homepage(request):
     return render(request, "homepage.html", {
@@ -16,7 +22,7 @@ def about_us(request):
 
 def products_list(request):
     products = Product.objects.all()
-
+    print(123, request.session.get('cart', {}))
     return render(request, "products/products_list.html", {
         'products': products,
     })
@@ -49,19 +55,22 @@ def category_filter(request):
     products = Product.objects.all()
     filter_param = request.GET.get('filter')
     current_category = None
-    
-    if filter_param == 'electronic':
-        products = products.filter(category__slug='electronic')
-        current_category = 'electronic'
-    elif filter_param == 'household_goods':
-        products = products.filter(category__slug='household_goods')
-        current_category = 'household_goods'
-    elif filter_param == 'animal':
-        products = products.filter(category__slug='animal')
-        current_category = 'animal'
-    elif filter_param == 'podarok':
-        products = products.filter(category__slug='podarok')
-        current_category = 'podarok'
+    if filter_param in ["electronic", "household_goods", "animal", "podarok"]:
+        products = products.filter(category__slug=filter_param)
+        current_category = filter_param
+
+    # if filter_param == 'electronic':
+    #     products = products.filter(category__slug='electronic')
+    #     current_category = 'electronic'
+    # elif filter_param == 'household_goods':
+    #     products = products.filter(category__slug='household_goods')
+    #     current_category = 'household_goods'
+    # elif filter_param == 'animal':
+    #     products = products.filter(category__slug='animal')
+    #     current_category = 'animal'
+    # elif filter_param == 'podarok':
+    #     products = products.filter(category__slug='podarok')
+    #     current_category = 'podarok'
         
     return render(request, "products/products_list.html", {
         'products': products,
@@ -70,5 +79,34 @@ def category_filter(request):
 
 
 def product_cart(request):
+    if request.user.is_authenticated:
+        cart_items = CartItem.objects.filter(user=request.user)
+    else:
+        cart_item = request.session.get('cart', {})
+        cart_items = Product.objects.filter(pk__in=cart_item.keys())
+        print(cart_item)
+        print()
 
-    return render(request, "products/product_cart.html", {'title': "Моя корзина"})
+        print(cart_items)
+    # recomended_products = Product.objects.order_by('?')[:4]
+    return render(request, "products/product_cart.html", {
+        # 'title': "Моя корзина",
+        'cart_items': cart_items,
+        # 'recommended_products': recomended_products,
+    })
+
+
+def add_product_to_cart(request, pk):
+    cart = request.session.get('cart', {})
+    cart[pk] = cart.get(pk, 0) + 1
+    request.session['cart'] = cart
+    return redirect("products:product_cart")
+
+
+def remove_product_from_cart(request, pk):
+    cart = request.session.get('cart', {})
+    if pk in cart:
+        del cart[pk]
+        request.session['cart'] = cart
+
+    return redirect("products:product_cart")

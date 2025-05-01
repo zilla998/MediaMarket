@@ -33,12 +33,12 @@
                     {% if item.product.image %}
                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                     {% else %}
-                    <img src="{% static 'assets/imgs/page/homepage1/product1.png' %}" alt="{{ item.product.name }}">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
                     {% endif %}
                   </div>
                   <div class="item-cart-info">
                     <div class="item-cart-info-1">
-                      <a class="text-16-medium" href="#">{{ item.product.name }}</a>
+                      <a class="text-16-medium" href="#">{{ item.name }}</a>
                       <div class="box-info-size-color-product">
                         <p class="box-color"><span class="body-p2 neutral-medium-dark">Цвет:</span><span class="body-p2 neutral-dark">{% if item.color %}{{ item.color }}{% else %}Стандартный{% endif %}</span></p>
                         <p class="box-size"><span class="body-p2 neutral-medium-dark">Размер:</span><span class="body-p2 neutral-dark">{% if item.size %}{{ item.size }}{% else %}Стандартный{% endif %}</span></p>
@@ -50,7 +50,7 @@
                       </div>
                     </div>
                     <div class="item-cart-info-2">
-                      <p class="body-p2">₽ {{ item.product.price }}</p>
+                      <p class="body-p2">₽ {{ item.price }}</p>
                       <a class="btn-remove-cart" href="#"></a>
                     </div>
                   </div>

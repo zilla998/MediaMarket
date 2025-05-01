@@ -238,6 +238,7 @@
                 <div class="cardInfo"><a href="#">
                     <h6 class="text-16-medium cardTitle">{{ product.name }}</h6></a>
                   <p class="body-p2 cardDesc">₽{{ product.price }}</p>
+                    <a href="{% url "products:add_product_to_cart" product.pk %}">Add to cart</a>
 
                 </div>
               </div>
