@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% with request.resolver_match.view_name as view_name %}
+    <main class="main">
+      <section class="section block-banner-cart mb-4">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-56-medium">Корзина</h1>
+            <div class="breadcrumbs">
+              <ul class="list-inline">
+                <li class="list-inline-item nav-link {% if view_name == 'products:homepage' %}active{% endif %}"> <a href="{% url 'products:homepage' %}">Главная </a></li>
+                <li class="list-inline-item nav-link {% if view_name == 'products:products_list' %}active{% endif %}"> <a href="{% url 'products:products_list' %}">Каталог </a></li>
+                <li class="list-inline-item nav-link {% if view_name == 'products:product_cart' %}active{% endif %}"> <a href="{% url 'products:product_cart' %}">Корзина </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section block-cart">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="box-title-cart">
+              <h4>Ваша корзина</h4>
+              <h6>{% if cart_items %}{{ cart_items|length }} товар{{ cart_items|length|pluralize:"а,ов" }}{% else %}0 товаров{% endif %}</h6>
+            </div>
+            <div class="list-items-cart">
+              {% if cart_items %}
+                {% for item in cart_items %}
+                <div class="item-cart">
+                  <div class="item-cart-image">
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    {% else %}
+                    <img src="{% static 'assets/imgs/page/homepage1/product1.png' %}" alt="{{ item.product.name }}">
+                    {% endif %}
+                  </div>
+                  <div class="item-cart-info">
+                    <div class="item-cart-info-1">
+                      <a class="text-16-medium" href="#">{{ item.product.name }}</a>
+                      <div class="box-info-size-color-product">
+                        <p class="box-color"><span class="body-p2 neutral-medium-dark">Цвет:</span><span class="body-p2 neutral-dark">{% if item.color %}{{ item.color }}{% else %}Стандартный{% endif %}</span></p>
+                        <p class="box-size"><span class="body-p2 neutral-medium-dark">Размер:</span><span class="body-p2 neutral-dark">{% if item.size %}{{ item.size }}{% else %}Стандартный{% endif %}</span></p>
+                      </div>
+                      <div class="box-form-cart">
+                        <div class="form-cart detail-qty"><span class="minus"></span>
+                          <input class="qty-val form-control" type="text" name="quantity" value="{{ item.quantity }}" min="1"><span class="plus"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-cart-info-2">
+                      <p class="body-p2">₽ {{ item.product.price }}</p>
+                      <a class="btn-remove-cart" href="#"></a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+                <div class="alert alert-info">
+                  <p>Ваша корзина пуста. <a href="{% url 'products:products_list' %}">Перейти в каталог</a></p>
+                </div>
+              {% endif %}
+            </div>
+            <div class="box-coupon">
+              <div class="coupon-left">
+                <input class="form-control input-coupon" type="text" placeholder="Промокод">
+                <button class="btn btn-border">Применить</button>
+              </div>
+              <div class="coupon-right"><a class="btn btn-border" href="{% url 'products:products_list' %}">Продолжить покупки</a></div>
+            </div>
+            <div class="box-may-also-like">
+              <h4 class="box-border-bottom mb-20">Вам также может понравиться</h4>
+              <div class="list-items-also-like">
+                {% for product in recommended_products %}
+                <div class="item-also-like">
+                  <div class="item-also-like-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <img src="{% static 'assets/imgs/page/homepage1/product3.png' %}" alt="{{ product.name }}">
+                    {% endif %}
+                  </div>
+                  <div class="item-also-like-info">
+                    <div class="item-also-like-info-1">
+                      <a class="text-16-medium" href="#">{{ product.name }}</a>
+                      <p class="body-2 neutral-medium-dark mb-8">₽ {{ product.price }}</p>
+                      <div class="box-color box-size mb-8"><span class="body-p2 neutral-medium-dark">Категория:</span>
+                        <div class="dropdown">
+                          <button class="btn dropdown-toggle" id="dropdownColor" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>{{ product.category.name }}</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-also-like-info-2">
+                      <div class="box-form-cart">
+                        <div class="form-cart detail-qty"><span class="minus"></span>
+                          <input class="qty-val form-control" type="text" name="quantity" value="1" min="1"><span class="plus"></span>
+                        </div>
+                        <a class="btn btn-black-medium" href="#">Добавить в корзину</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="box-detail-cart">
+              <h4 class="mb-25">Итого заказа</h4>
+              <div class="box-info-cart">
+                <div class="d-flex align-items-center justify-content-between box-border-bottom">
+                  <h5 class="neutral-medium-dark">Товары</h5>
+                  <h5 class="neutral-dark">₽ {{ total_price }}</h5>
+                </div>
+                <div class="box-info-cart-inner">
+                  <p class="text-17-medium text-uppercase mb-15">Доставка</p>
+                  <div class="list-radio">
+                    <div class="item-radio">
+                      <label>
+                        <input type="radio" name="shipping" checked="checked">Стандартная: ₽{{ shipping_cost }}
+                      </label><span class="price-ship">₽{{ shipping_cost }}</span>
+                    </div>
+                    <div class="item-radio">
+                      <label>
+                        <input type="radio" name="shipping">Экспресс: ₽1000
+                      </label>
+                    </div>
+                  </div>
+                  <p class="body-p2 neutral-medium-dark mb-12">Варианты доставки будут уточнены при оформлении.</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between box-total-bottom">
+                  <h5 class="neutral-medium-dark">Итого</h5>
+                  <h5 class="neutral-dark">₽ {{ total_with_shipping }}</h5>
+                </div>
+                <div class="box-button-cart"><a class="btn btn-black" href="#">Оформить заказ</a></div>
+                <div class="box-other-link"><a class="text-17 link-green" href="#">Бесплатная доставка при заказе от ₽10,000</a><a class="text-17" href="{% url 'products:products_list' %}">Продолжить покупки</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+{% endwith %}
+{% endblock %}

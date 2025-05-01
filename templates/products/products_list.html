@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+{% with request.resolver_match.view_name as view_name %}
     <main class="main">
       <section class="section block-banner-shop">
         <div class="container">
           <h1 class="text-56-medium">Каталог</h1>
           <div class="breadcrumbs">
             <ul>
-              <li> <a href="{% url 'products:homepage' %}">Главная </a></li>
-              <li> <a href="{% url 'products:products_list' %}">Каталог </a></li>
+              <li class="nav-link {% if view_name == 'products:homepage' %}active{% endif %}"> <a href="{% url 'products:homepage' %}">Главная </a></li>
+              <li class="nav-link {% if view_name == 'products:products_list' %}active{% endif %}"> <a href="{% url 'products:products_list' %}">Каталог </a></li>
             </ul>
           </div>
         </div>
@@ -18,11 +20,11 @@
           <div class="box-filter-top box-filter-top-style3">
             <div class="box-filters d-none d-lg-block">
               <ul class="list-category">
-                <li class="active"> <a href="#">Все товары</a></li>
-                <li> <a href="#">Электроника</a></li>
-                <li> <a href="#">Бытовые товары</a></li>
-                <li> <a href="#">Детские товары</a></li>
-                <li> <a href="#">Подарки</a></li>
+                <li class="nav-link {% if not current_category %}active{% endif %}"> <a href="{% url 'products:products_list' %}">Все товары</a></li>
+                <li class="nav-link {% if current_category == 'electronic' %}active{% endif %}"> <a href="{% url 'products:category_filter' %}?filter=electronic">Электроника</a></li>
+                <li class="nav-link {% if current_category == 'household_goods' %}active{% endif %}"> <a href="{% url 'products:category_filter' %}?filter=household_goods">Бытовые товары</a></li>
+                <li class="nav-link {% if current_category == 'animal' %}active{% endif %}"> <a href="{% url 'products:category_filter' %}?filter=animal">Животные</a></li>
+                <li class="nav-link {% if current_category == 'podarok' %}active{% endif %}"> <a href="{% url 'products:category_filter' %}?filter=podarok">Подарки</a></li>
               </ul>
             </div>
             <div class="box-sort"> <a class="btn-open-filter btn-open-filter-click" href="#">Фильтр </a>
@@ -30,9 +32,9 @@
                 <div class="dropdown dropdown-sort">
                   <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">Сортировка</button>
                   <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort" style="margin: 0px;">
-                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=date">Новинки</a></li>
-                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_desc">Цена ↓</a></li>
-                    <li><a class="dropdown-item" href="{% url "products:products_list" %}?sort=price_asc">Цена ↑</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:category_sort" %}?sort=date">Новинки</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:category_sort" %}?sort=price_desc">Цена ↓</a></li>
+                    <li><a class="dropdown-item" href="{% url "products:category_sort" %}?sort=price_asc">Цена ↑</a></li>
                   </ul>
                 </div>
               </div>
@@ -199,8 +201,8 @@
               {% for product in products %}
             <div class="product-item">
               <div class="cardProduct wow fadeInUp">
-                <div class="cardImage"><a href="{% url "products:product_detail" product.pk %}"><img class="imageMain" src="{{ product.image.url }}" alt="guza"><img class="imageHover" src="assets/imgs/page/homepage1/product1-hover.png" alt="guza"></a>
-                  <div class="button-select"><a href="#">Select Options</a></div>
+                <div class="cardImage"><a href="{% url "products:product_detail" product.pk %}"><img class="imageMain" src="{{ product.image.url }}" alt="guza"><img class="imageHover" src="{% static 'assets/imgs/template/mondragon-corporacion.svg' %}" alt="guza"></a>
+                  <div class="button-select"><a href="#">Выбрать комплектацию</a></div>
                   <div class="box-quick-button"><a class="btn" href="#">
                       <svg class="d-inline-flex align-items-center justify-content-center" width="28" height="28" viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_116_452)">
@@ -974,4 +976,5 @@
     <script src="assets/js/main.js?v=1.0.0"></script>
   </body>
 </html>
+{% endwith%}
 {% endblock %}

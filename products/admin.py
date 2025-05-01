@@ -3,7 +3,6 @@ from django.contrib import admin
 from products.models import Product, Category, CartItem, Favorite, Order, OrderItem
 
 
-# Register your models here.
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'in_stock', 'create_at')
