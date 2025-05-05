@@ -6,7 +6,7 @@ from .models import Product, CartItem
 
 
 @receiver(user_logged_in)
-def test_reciver(**kwargs):
+def test_receiver(**kwargs):
     print("OK")
 
 def homepage(request):

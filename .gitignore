@@ -9,9 +9,11 @@ env/
 venv/
 .venv/
 ENV/
-.env/
 
-# 3. Логи, отчёты тестов, кеши
+# 3. Переменные окружения
+*.env
+
+# 4. Логи, отчёты тестов, кеши
 *.log
 *.pot
 *.mo
@@ -22,33 +24,35 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+__snapshots__/
 
-# 4. Сборки и пакеты
+# 5. Сборки и пакеты
 build/
 dist/
 *.egg-info/
 .eggs/
 
-# 5. База данных
+# 6. Базы данных (локальные)
 db.sqlite3
 *.sqlite3
 *.sqlite
+*.sqlite3-journal
 identifier.sqlite
 
-# 6. Медиа и статику, собираемую collectstatic
+# 7. Статика и медиа
 media/
-staticfiles/
-# исходники статики (app/static/) в git оставляйте
+staticfiles/  # результат collectstatic, не хранится в гите
+# static/ (исходники, например app/static/) — остаются в гите
 
-# 7. Локальные настройки
+# 8. Локальные настройки
 local_settings.py
 
-# 8. IDE и редакторы
+# 9. IDE и редакторы
 .vscode/
 .idea/
 *.sublime-workspace
 *.sublime-project
 
-# 9. ОС‑специфичные файлы
+# 10. ОС‑специфичные файлы
 .DS_Store
 Thumbs.db
