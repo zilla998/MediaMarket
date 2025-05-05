@@ -51,7 +51,7 @@
                     </div>
                     <div class="item-cart-info-2">
                       <p class="body-p2">₽ {{ item.price }}</p>
-                      <a class="btn-remove-cart" href="{% url 'products:remove_product_from_cart' item.product.pk %}"></a>
+                      <a class="btn-remove-cart" href="{% if request.user.is_authenticated %}{% url 'products:remove_product_from_cart' item.product.pk %}{% else %}{% url 'products:remove_product_from_cart' item.pk %}{% endif %}"></a>
                     </div>
                   </div>
                 </div>
