@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
+from django.db.models import F
 
 from .models import Product, CartItem
 
@@ -112,16 +113,26 @@ def product_cart(request):
 
 
 def add_product_to_cart(request, pk):
-    cart = request.session.get('cart', {})
-    cart[pk] = cart.get(pk, 0) + 1
-    request.session['cart'] = cart
+    if request.user.is_authenticated:
+        CartItem.objects.filter(user=request.user, product_id=pk).update(
+            quantity=F('quantity') + 1
+        )
+
+    else:
+        cart = request.session.get('cart', {})
+        cart[pk] = cart.get(pk, 0) + 1
+        request.session['cart'] = cart
     return redirect("products:product_cart")
 
 
 def remove_product_from_cart(request, pk):
-    cart = request.session.get('cart', {})
-    if pk in cart:
-        del cart[pk]
-        request.session['cart'] = cart
+    if request.user.is_authenticated:
+        CartItem.objects.filter(user=request.user, product_id=pk).delete()
+
+    else:
+        cart = request.session.get('cart', {})
+        if pk in cart:
+            del cart[pk]
+            request.session['cart'] = cart
 
     return redirect("products:product_cart")
