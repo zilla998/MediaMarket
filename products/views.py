@@ -6,8 +6,28 @@ from .models import Product, CartItem
 
 
 @receiver(user_logged_in)
-def test_receiver(**kwargs):
-    print("OK")
+def transfer_cart_items(sender, user, request, **kwargs):
+    session_cart = request.session.get('cart', {})
+    
+    if session_cart:
+        for product_id, quantity in session_cart.items():
+            try:
+                product = Product.objects.get(pk=product_id)
+                cart_item, created = CartItem.objects.get_or_create(
+                    user=user,
+                    product=product,
+                    defaults={'quantity': quantity}
+                )
+                
+                if not created:
+                    cart_item.quantity += quantity
+                    cart_item.save()
+                    
+            except Product.DoesNotExist:
+                continue
+
+        request.session['cart'] = {}
+        request.session.modified = True
 
 def homepage(request):
     return render(request, "homepage.html", {
@@ -22,7 +42,6 @@ def about_us(request):
 
 def products_list(request):
     products = Product.objects.all()
-    print(123, request.session.get('cart', {}))
     return render(request, "products/products_list.html", {
         'products': products,
     })
@@ -84,10 +103,6 @@ def product_cart(request):
     else:
         cart_item = request.session.get('cart', {})
         cart_items = Product.objects.filter(pk__in=cart_item.keys())
-        print(cart_item)
-        print()
-
-        print(cart_items)
     # recomended_products = Product.objects.order_by('?')[:4]
     return render(request, "products/product_cart.html", {
         # 'title': "Моя корзина",
