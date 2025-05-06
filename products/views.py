@@ -111,12 +111,18 @@ def product_cart(request):
         # 'recommended_products': recomended_products,
     })
 
-
 def add_product_to_cart(request, pk):
     if request.user.is_authenticated:
-        CartItem.objects.filter(user=request.user, product_id=pk).update(
-            quantity=F('quantity') + 1
+        product = Product.objects.get(pk=pk)
+        cart_item, created = CartItem.objects.get_or_create(
+            user=request.user,
+            product=product,
+            defaults={'quantity': 1}
         )
+            
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
 
     else:
         cart = request.session.get('cart', {})
