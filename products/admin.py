@@ -1,6 +1,21 @@
 from django.contrib import admin
 
-from products.models import Product, Category, CartItem, Favorite, Order, OrderItem
+from products.models import (
+    Product, Category, CartItem,
+    Favorite, Order, OrderItem,
+    Cart, ProductInCart
+)
+
+class ProductInCartInlineModel(admin.TabularInline):
+    model = ProductInCart
+    extra = 2
+
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ("pk", "user")
+    inlines = (ProductInCartInlineModel,)
 
 
 @admin.register(Product)

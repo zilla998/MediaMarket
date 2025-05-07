@@ -33,6 +33,49 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
 
+
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
+    products = models.ManyToManyField(
+        Product,
+        through="ProductInCart",
+        related_name="carts",
+        verbose_name="Продукты"
+    )
+
+    class Meta:
+        verbose_name = "Корзины"
+        verbose_name_plural = "Корзины"
+
+    def total_price(self):
+        return sum(item.price for item in self.products.all())
+
+    # def __str__(self):
+    #     return self.user
+
+
+class ProductInCart(models.Model):
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+        verbose_name = "Корзина"
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name="Продукт"
+    )
+    amount = models.IntegerField(default=1, verbose_name="Кол-во")
+
+    class Meta:
+        verbose_name = "Продукты в корзине"
+        verbose_name_plural = "Продукты в корзинах"
+
+    def __str__(self):
+        return f"{self.product} - {self.amount}"
+
 # Позиция товара в корзине пользователя
 class CartItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")

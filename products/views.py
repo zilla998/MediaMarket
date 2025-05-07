@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 from django.db.models import F
 
-from .models import Product, CartItem, Favorite
+from .models import Product, CartItem, Favorite, Cart, ProductInCart
 
 
 @receiver(user_logged_in)
@@ -100,11 +100,10 @@ def category_filter(request):
 
 def product_cart(request):
     if request.user.is_authenticated:
-        cart_items = CartItem.objects.filter(user=request.user)
-        total_price = 0
-        for cart_item in cart_items:
-            cart_item.total_price = cart_item.product.price * cart_item.quantity
-            total_price += cart_item.total_price
+        cart = Cart.objects.get(user=request.user)
+        cart_items = ProductInCart.objects.filter(
+            cart=cart
+        )
     else:
         cart_item = request.session.get('cart', {})
         cart_items = Product.objects.filter(pk__in=cart_item.keys())
@@ -117,22 +116,24 @@ def product_cart(request):
     return render(request, "products/product_cart.html", {
         'title': "Моя корзина",
         'cart_items': cart_items,
-        'total_price': total_price,
+        'total_price': cart.total_price(),
         'recommended_products': recomended_products,
     })
 
 def add_product_to_cart(request, pk):
     if request.user.is_authenticated:
         product = Product.objects.get(pk=pk)
-        cart_item, created = CartItem.objects.get_or_create(
-            user=request.user,
+        cart, created = Cart.objects.get_or_create(user=request.user)
+
+        product_in_cart, created = ProductInCart.objects.get_or_create(
+            cart=cart,
             product=product,
-            defaults={'quantity': 1}
+            amount=1
         )
-            
+
         if not created:
-            cart_item.quantity += 1
-            cart_item.save()
+            product_in_cart.amount += 1
+            product_in_cart.save()
 
     else:
         cart = request.session.get('cart', {})
@@ -144,7 +145,9 @@ def add_product_to_cart(request, pk):
 
 def remove_product_from_cart(request, pk):
     if request.user.is_authenticated:
-        CartItem.objects.filter(user=request.user, product_id=pk).delete()
+        product = Product.objects.get(pk=pk)
+        cart = Cart.objects.get(user=request.user)
+        cart.products.remove(product)
 
     else:
         cart = request.session.get('cart', {})
@@ -203,3 +206,23 @@ def remove_product_to_favorite(request, pk):
             request.session['favorite'] = favorite
 
     return redirect("products:favorite_product")
+
+def product_checkout(request):
+    if request.user.is_authenticated:
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = 0
+        for cart_item in cart_items:
+            cart_item.total_price = cart_item.product.price * cart_item.quantity
+            total_price += cart_item.total_price
+    else:
+        cart_item = request.session.get('cart', {})
+        cart_items = Product.objects.filter(pk__in=cart_item.keys())
+        total_price = 0
+        for product in cart_items:
+            product.total_price = product.price * cart_item[str(product.pk)]
+            total_price += product.total_price
+
+    return render(request, "products/product_checkout.html", {
+        'title': "Оформление заказа",
+        'cart_items': cart_items,
+    })
