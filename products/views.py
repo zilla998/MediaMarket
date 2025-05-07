@@ -167,7 +167,7 @@ def favorite_product(request):
 
     recomended_products = Product.objects.order_by('?')[:4]
     return render(request, "products/product_favorite.html", {
-        'title': "Моя корзина",
+        'title': "Избранное",
         'favorite_items': favorite_items,
         'recommended_products': recomended_products,
     })

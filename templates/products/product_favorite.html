@@ -7,7 +7,7 @@
       <section class="section block-banner-cart mb-4">
         <div class="row">
           <div class="col-12">
-            <h1 class="text-56-medium">Корзина</h1>
+            <h1 class="text-56-medium">{{ title }}</h1>
             <div class="breadcrumbs">
               <ul class="list-inline">
                 <li class="list-inline-item nav-link {% if view_name == 'products:homepage' %}active{% endif %}"> <a href="{% url 'products:homepage' %}">Главная </a></li>
@@ -45,7 +45,7 @@
                       </div>
                     </div>
                     <div class="item-cart-info-2">
-                      <p class="body-p2">₽ {{ item.price }}</p>
+                      <p class="body-p2">₽ {{ item.product.price }}</p>
                       <a class="btn-remove-cart" href="{% if request.user.is_authenticated %}{% url 'products:remove_product_to_favorite' item.product.pk %}{% else %}{% url 'products:remove_product_from_cart' item.pk %}{% endif %}"></a>
                     </div>
                   </div>
