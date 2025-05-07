@@ -101,14 +101,24 @@ def category_filter(request):
 def product_cart(request):
     if request.user.is_authenticated:
         cart_items = CartItem.objects.filter(user=request.user)
+        total_price = 0
+        for cart_item in cart_items:
+            cart_item.total_price = cart_item.product.price * cart_item.quantity
+            total_price += cart_item.total_price
     else:
         cart_item = request.session.get('cart', {})
         cart_items = Product.objects.filter(pk__in=cart_item.keys())
-    # recomended_products = Product.objects.order_by('?')[:4]
+        total_price = 0
+        for product in cart_items:
+            product.total_price = product.price * cart_item[str(product.pk)]
+            total_price += product.total_price
+
+    recomended_products = Product.objects.order_by('?')[:4]
     return render(request, "products/product_cart.html", {
-        # 'title': "Моя корзина",
+        'title': "Моя корзина",
         'cart_items': cart_items,
-        # 'recommended_products': recomended_products,
+        'total_price': total_price,
+        'recommended_products': recomended_products,
     })
 
 def add_product_to_cart(request, pk):
@@ -128,6 +138,7 @@ def add_product_to_cart(request, pk):
         cart = request.session.get('cart', {})
         cart[pk] = cart.get(pk, 0) + 1
         request.session['cart'] = cart
+
     return redirect("products:product_cart")
 
 

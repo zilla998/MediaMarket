@@ -50,7 +50,7 @@
                       </div>
                     </div>
                     <div class="item-cart-info-2">
-                      <p class="body-p2">₽ {{ item.price }}</p>
+                      <p class="body-p2">₽ {{ item.total_price }}</p>
                       <a class="btn-remove-cart" href="{% if request.user.is_authenticated %}{% url 'products:remove_product_from_cart' item.product.pk %}{% else %}{% url 'products:remove_product_from_cart' item.pk %}{% endif %}"></a>
                     </div>
                   </div>
@@ -120,7 +120,7 @@
                   <div class="list-radio">
                     <div class="item-radio">
                       <label>
-                        <input type="radio" name="shipping" checked="checked">Стандартная: ₽{{ shipping_cost }}
+                        <input type="radio" name="shipping" checked="checked">Стандартная: ₽560{{ shipping_cost }}
                       </label><span class="price-ship">₽{{ shipping_cost }}</span>
                     </div>
                     <div class="item-radio">
