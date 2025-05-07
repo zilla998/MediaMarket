@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 from django.db.models import F
 
-from .models import Product, CartItem
+from .models import Product, CartItem, Favorite
 
 
 @receiver(user_logged_in)
@@ -153,3 +153,53 @@ def remove_product_from_cart(request, pk):
             request.session['cart'] = cart
 
     return redirect("products:product_cart")
+
+
+
+def favorite_product(request):
+    if request.user.is_authenticated:
+        favorite_items = Favorite.objects.filter(user=request.user)
+
+    else:
+        favorite_item = request.session.get('cart', {})
+        favorite_items = Product.objects.filter(pk__in=favorite_item.keys())
+
+
+    recomended_products = Product.objects.order_by('?')[:4]
+    return render(request, "products/product_favorite.html", {
+        'title': "Моя корзина",
+        'favorite_items': favorite_items,
+        'recommended_products': recomended_products,
+    })
+
+
+def add_product_to_favorite(request, pk):
+    if request.user.is_authenticated:
+        product = Product.objects.get(pk=pk)
+        favorite_item, created = Favorite.objects.get_or_create(
+            user=request.user,
+            product=product,
+        )
+
+        if not created:
+            favorite_item.save()
+
+    else:
+        favorite = request.session.get('favorite', {})
+        favorite[pk] = favorite.get(pk, 0) + 1
+        request.session['favorite'] = favorite
+
+    return redirect("products:favorite_product")
+
+
+def remove_product_to_favorite(request, pk):
+    if request.user.is_authenticated:
+        Favorite.objects.filter(user=request.user, product_id=pk).delete()
+
+    else:
+        favorite = request.session.get('favorite', {})
+        if pk in favorite:
+            del favorite[pk]
+            request.session['favorite'] = favorite
+
+    return redirect("products:favorite_product")

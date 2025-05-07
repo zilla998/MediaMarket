@@ -2,7 +2,8 @@ from django.urls import path
 
 from .views import (products_list, product_detail, homepage,
                     category_sort, category_filter, product_cart,
-                    about_us, add_product_to_cart, remove_product_from_cart)
+                    about_us, add_product_to_cart, remove_product_from_cart,
+                    favorite_product, add_product_to_favorite, remove_product_to_favorite,)
 
 app_name = "products"
 
@@ -16,4 +17,7 @@ urlpatterns = [
     path("cart/", product_cart, name="product_cart"),
     path("cart/add/<pk>", add_product_to_cart, name="add_product_to_cart"),
     path("cart/remove/<pk>", remove_product_from_cart, name="remove_product_from_cart"),
+    path("favorite/", favorite_product, name="favorite_product"),
+    path("favorite/add/<pk>", add_product_to_favorite, name="add_product_to_favorite"),
+    path("favorite/remove/<pk>", remove_product_to_favorite, name="remove_product_to_favorite"),
 ]
