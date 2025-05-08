@@ -73,6 +73,9 @@ class ProductInCart(models.Model):
         verbose_name = "Продукты в корзине"
         verbose_name_plural = "Продукты в корзинах"
 
+    def total_product_price(self):
+        return self.product.price * self.amount
+
     def __str__(self):
         return f"{self.product} - {self.amount}"
 

@@ -9,7 +9,7 @@ from .models import Product, CartItem, Favorite, Cart, ProductInCart
 @receiver(user_logged_in)
 def transfer_cart_items(sender, user, request, **kwargs):
     session_cart = request.session.get('cart', {})
-    
+
     if session_cart:
         for product_id, quantity in session_cart.items():
             try:
@@ -19,21 +19,23 @@ def transfer_cart_items(sender, user, request, **kwargs):
                     product=product,
                     defaults={'quantity': quantity}
                 )
-                
+
                 if not created:
                     cart_item.quantity += quantity
                     cart_item.save()
-                    
+
             except Product.DoesNotExist:
                 continue
 
         request.session['cart'] = {}
         request.session.modified = True
 
+
 def homepage(request):
     return render(request, "homepage.html", {
         "title": "Главная страница"
     })
+
 
 def about_us(request):
     return render(request, "about_us.html", {
@@ -91,7 +93,7 @@ def category_filter(request):
     # elif filter_param == 'podarok':
     #     products = products.filter(category__slug='podarok')
     #     current_category = 'podarok'
-        
+
     return render(request, "products/products_list.html", {
         'products': products,
         'current_category': current_category,
@@ -104,6 +106,7 @@ def product_cart(request):
         cart_items = ProductInCart.objects.filter(
             cart=cart
         )
+
     else:
         cart_item = request.session.get('cart', {})
         cart_items = Product.objects.filter(pk__in=cart_item.keys())
@@ -120,6 +123,7 @@ def product_cart(request):
         'recommended_products': recomended_products,
     })
 
+
 def add_product_to_cart(request, pk):
     if request.user.is_authenticated:
         product = Product.objects.get(pk=pk)
@@ -128,7 +132,6 @@ def add_product_to_cart(request, pk):
         product_in_cart, created = ProductInCart.objects.get_or_create(
             cart=cart,
             product=product,
-            amount=1
         )
 
         if not created:
@@ -158,7 +161,6 @@ def remove_product_from_cart(request, pk):
     return redirect("products:product_cart")
 
 
-
 def favorite_product(request):
     if request.user.is_authenticated:
         favorite_items = Favorite.objects.filter(user=request.user)
@@ -166,7 +168,6 @@ def favorite_product(request):
     else:
         favorite_item = request.session.get('cart', {})
         favorite_items = Product.objects.filter(pk__in=favorite_item.keys())
-
 
     recomended_products = Product.objects.order_by('?')[:4]
     return render(request, "products/product_favorite.html", {
@@ -206,6 +207,7 @@ def remove_product_to_favorite(request, pk):
             request.session['favorite'] = favorite
 
     return redirect("products:favorite_product")
+
 
 def product_checkout(request):
     if request.user.is_authenticated:

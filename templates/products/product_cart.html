@@ -50,7 +50,7 @@
                       </div>
                     </div>
                     <div class="item-cart-info-2">
-                      <p class="body-p2">₽ {{ item.total_price }}</p>
+                      <p class="body-p2">₽ {{ item.total_product_price }}</p>
                       <a class="btn-remove-cart" href="{% if request.user.is_authenticated %}{% url 'products:remove_product_from_cart' item.product.pk %}{% else %}{% url 'products:remove_product_from_cart' item.pk %}{% endif %}"></a>
                     </div>
                   </div>
