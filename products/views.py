@@ -45,24 +45,11 @@ def about_us(request):
     })
 
 
-# def products_list(request):
-    # query = request.GET.get('q', '')
-    # products = Product.objects.all()
-    # if query:
-    #     products = products.filter(
-    #         Q(name__icontains=query) | Q(description__icontains=query)
-    #     )
-    # return render(request, "products/products_list.html", {
-    #     'products': products,
-    #     'query': query,
-    # })
-
 def products_list(request):
     query = request.GET.get('q', '')
     products = Product.objects.all()
     if query:
         query_lower = query.lower()
-        # Фильтрация прямо в Python, чтобы работало с кириллицей
         products = [product for product in products if query_lower in product.name.lower() or query_lower in product.description.lower()]
     return render(request, "products/products_list.html", {
         'products': products,
