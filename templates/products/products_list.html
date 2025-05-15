@@ -193,12 +193,16 @@
           </div>
         </div>
         <div class="container">
+          {% if query %}
+              <h2 style="margin-bottom: 20px;">Результаты поиска: "{{ query }}"</h2>
+          {% endif %}
           <div class="box-your-filter box-your-filter-shop2">
             <div class="block-text-filter"><span class="body-p2 neutral-medium-dark">Ваш фильтр</span></div>
             <div class="block-ele-filter"><a class="btn btn-tag-filter" href="#">XS<span class="close-tag"></span></a><a class="btn btn-tag-filter" href="#">Women<span class="close-tag"></span></a><a class="clear-filter link-underline" href="#">Очистить</a></div>
           </div>
           <div class="box-list-products box-list-products-4 box-list-products-shop-2">
-              {% for product in products %}
+              {% if products %}
+                  {% for product in products %}
             <div class="product-item">
               <div class="cardProduct wow fadeInUp">
                 <div class="cardImage"><a href="{% url "products:product_detail" product.pk %}"><img class="imageMain" src="{{ product.image.url }}" alt="guza"><img class="imageHover" src="{% static 'assets/imgs/template/mondragon-corporacion.svg' %}" alt="guza"></a>
@@ -243,7 +247,13 @@
                 </div>
               </div>
             </div>
-{% endfor %}
+        {% endfor %}
+              {% else %}
+                  <div style="padding:30px 0;text-align:center;font-size:1.3em;color:#777;">
+                      Ничего не найдено
+                  </div>
+              {% endif %}
+          </div>
 
         </div>
       </section>

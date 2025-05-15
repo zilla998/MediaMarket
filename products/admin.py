@@ -3,8 +3,14 @@ from django.contrib import admin
 from products.models import (
     Product, Category, CartItem,
     Favorite, Order, OrderItem,
-    Cart, ProductInCart
+    Cart, ProductInCart, ProductInOrder
 )
+
+
+class ProductInOrderInlineModel(admin.TabularInline):
+    model = ProductInOrder
+    extra = 2
+
 
 class ProductInCartInlineModel(admin.TabularInline):
     model = ProductInCart
@@ -41,6 +47,7 @@ class FavoriteAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('user', 'full_name', 'address', 'phone', 'email', 'status', 'total_price', 'create_at')
+    inlines = (ProductInOrderInlineModel,)
 
 
 @admin.register(OrderItem)

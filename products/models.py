@@ -79,6 +79,9 @@ class ProductInCart(models.Model):
     def __str__(self):
         return f"{self.product} - {self.amount}"
 
+
+
+
 # Позиция товара в корзине пользователя
 class CartItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
@@ -119,6 +122,12 @@ class Order(models.Model):
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Заказчик")
     full_name = models.CharField(max_length=255, verbose_name="ФИО")
+    products = models.ManyToManyField(
+        Product,
+        through="ProductInOrder",
+        related_name="orders",
+        verbose_name="Продукты"
+    )
     address = models.CharField(max_length=255, verbose_name="Адрес доставки")
     phone = models.CharField(max_length=255, verbose_name="Контактный номер")
     email = models.EmailField(verbose_name="Email")
@@ -132,6 +141,30 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+
+
+class ProductInOrder(models.Model):
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        verbose_name = "Корзина"
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name="Продукт"
+    )
+    amount = models.IntegerField(default=1, verbose_name="Кол-во")
+
+    class Meta:
+        verbose_name = "Продукты в заказе"
+        verbose_name_plural = "Продукты в заказах"
+
+    def total_product_price(self):
+        return self.product.price * self.amount
+
+    def __str__(self):
+        return f"{self.product} - {self.amount}"
 
 
 # Привязка товаров к заказу

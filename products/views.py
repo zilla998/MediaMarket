@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
-from django.db.models import F
 
-from .models import Product, CartItem, Favorite, Cart, ProductInCart
+from django.db.models import Q
+
+from .forms import OrderForm
+from .models import Product, CartItem, Favorite, Cart, ProductInCart, ProductInOrder
 
 
 @receiver(user_logged_in)
@@ -44,9 +46,17 @@ def about_us(request):
 
 
 def products_list(request):
+    query = request.GET.get('q', '')
     products = Product.objects.all()
+    if query:
+        keywords = query.split()
+        for word in keywords:
+            products = products.filter(
+                Q(name__icontains=word) | Q(description__icontains=word)
+            )
     return render(request, "products/products_list.html", {
         'products': products,
+        'query': query,
     })
 
 
@@ -107,6 +117,7 @@ def product_cart(request):
             cart=cart
         )
 
+
     else:
         cart_item = request.session.get('cart', {})
         cart_items = Product.objects.filter(pk__in=cart_item.keys())
@@ -119,7 +130,7 @@ def product_cart(request):
     return render(request, "products/product_cart.html", {
         'title': "Моя корзина",
         'cart_items': cart_items,
-        'total_price': cart.total_price(),
+        'total_price': 0,
         'recommended_products': recomended_products,
     })
 
@@ -210,21 +221,69 @@ def remove_product_to_favorite(request, pk):
 
 
 def product_checkout(request):
+    if request.method == "POST":
+
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            cart = Cart.objects.get(user=request.user)
+            cart_items = ProductInCart.objects.filter(
+                cart=cart
+            )
+            order = form.save(commit=False)
+            order.user = request.user
+            order.total_price = cart.total_price()
+            order.save()
+            for item in cart_items:
+                ProductInOrder.objects.create(
+                    order=order,
+                    product=item.product,
+                    amount=item.amount
+                )
+            cart.products.clear()
+            return redirect("products:homepage")
+    else:
+        data = {
+            "full_name": request.user.get_full_name(),
+            "email": request.user.email,
+            "address": request.user.address_default
+        }
+        form = OrderForm(initial=data)
     if request.user.is_authenticated:
-        cart_items = CartItem.objects.filter(user=request.user)
+        cart = Cart.objects.get(user=request.user)
+        cart_items = ProductInCart.objects.filter(
+            cart=cart
+        )
         total_price = 0
         for cart_item in cart_items:
-            cart_item.total_price = cart_item.product.price * cart_item.quantity
+            cart_item.total_price = cart_item.product.price * cart_item.amount
             total_price += cart_item.total_price
     else:
         cart_item = request.session.get('cart', {})
-        cart_items = Product.objects.filter(pk__in=cart_item.keys())
+        products = Product.objects.filter(pk__in=cart_item.keys())
+        cart_items = []
         total_price = 0
-        for product in cart_items:
+        for product in products:
             product.total_price = product.price * cart_item[str(product.pk)]
             total_price += product.total_price
+            cart_items.append(product)
+
+    shipping_price = {
+        'direct': 500,
+        'pickup': 1000,
+    }
+
+    shipping_type = request.GET.get('shipping')
+    print(shipping_type)
+    if shipping_type == 'direct':
+        total_price += shipping_price['direct']
+    if shipping_type == 'pickup':
+        total_price += shipping_price['pickup']
 
     return render(request, "products/product_checkout.html", {
         'title': "Оформление заказа",
         'cart_items': cart_items,
+        'total_price': total_price,
+        'sub_total_price': total_price - shipping_price.get(shipping_type, 0),
+        'shipping_price': shipping_price,
+        "form": form
     })

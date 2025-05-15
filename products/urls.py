@@ -25,4 +25,5 @@ urlpatterns = [
     path("favorite/remove/<pk>", remove_product_to_favorite,
          name="remove_product_to_favorite"),
     path("checkout/", product_checkout, name="product_checkout"),
+    # path('checkout/select-shipping/', select_shipping, name='select_shipping'),
 ]
