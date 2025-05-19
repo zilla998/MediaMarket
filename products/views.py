@@ -218,7 +218,6 @@ def remove_product_to_favorite(request, pk):
 
     return redirect("products:favorite_product")
 
-
 def product_checkout(request):
     if request.method == "POST":
 

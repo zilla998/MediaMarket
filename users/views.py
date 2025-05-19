@@ -10,7 +10,7 @@ from users.models import CustomUser
 
 def user_profile(request, pk):
     user = CustomUser.objects.get(pk=pk)
-    orders = Order.objects.filter(user=user)
+    orders = Order.objects.filter(user=user).order_by('-create_at')
     return render(request, 'users/profile.html', {'orders': orders, 'user': user})
 
 
