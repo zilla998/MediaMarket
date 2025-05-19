@@ -103,6 +103,9 @@ class Favorite(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
+    def favorite_count(self):
+        return Favorite.objects.filter(user=self.user).count()
+
     def __str__(self):
         return f"{self.product.name}"
 

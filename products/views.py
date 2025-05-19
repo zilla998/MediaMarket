@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 
 from django.db.models import Q
 
+from MediaMarket.settings import LOGIN_URL
 from .forms import OrderForm
 from .models import Product, CartItem, Favorite, Cart, ProductInCart, ProductInOrder
 
@@ -112,7 +114,7 @@ def product_cart(request):
         cart_items = ProductInCart.objects.filter(
             cart=cart
         )
-
+        total_price = cart.total_price()
 
     else:
         cart_item = request.session.get('cart', {})
@@ -126,7 +128,7 @@ def product_cart(request):
     return render(request, "products/product_cart.html", {
         'title': "Моя корзина",
         'cart_items': cart_items,
-        'total_price': 0,
+        'total_price': total_price,
         'recommended_products': recomended_products,
     })
 
@@ -168,12 +170,13 @@ def remove_product_from_cart(request, pk):
     return redirect("products:product_cart")
 
 
+@login_required(login_url=LOGIN_URL)
 def favorite_product(request):
     if request.user.is_authenticated:
         favorite_items = Favorite.objects.filter(user=request.user)
 
     else:
-        favorite_item = request.session.get('cart', {})
+        favorite_item = request.session.get('favorite', {})
         favorite_items = Product.objects.filter(pk__in=favorite_item.keys())
 
     recomended_products = Product.objects.order_by('?')[:4]
@@ -183,7 +186,7 @@ def favorite_product(request):
         'recommended_products': recomended_products,
     })
 
-
+@login_required(login_url=LOGIN_URL)
 def add_product_to_favorite(request, pk):
     if request.user.is_authenticated:
         product = Product.objects.get(pk=pk)
@@ -200,7 +203,7 @@ def add_product_to_favorite(request, pk):
         favorite[pk] = favorite.get(pk, 0) + 1
         request.session['favorite'] = favorite
 
-    return redirect("products:favorite_product")
+    return redirect(request.META.get('HTTP_REFERER', 'products:products_list'))
 
 
 def remove_product_to_favorite(request, pk):

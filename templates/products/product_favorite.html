@@ -89,6 +89,7 @@
                           <input class="qty-val form-control" type="text" name="quantity" value="1" min="1"><span class="plus"></span>
                         </div>
                         <a class="btn btn-black-medium" href="{% url "products:add_product_to_cart" product.pk %}">Добавить в корзину</a>
+                        <a class="btn btn-red" href="{% url "products:add_product_to_favorite" product.pk %}">Добавить в избранное</a>
                       </div>
                     </div>
                   </div>

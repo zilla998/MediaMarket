@@ -53,6 +53,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.year.year',
                 'products.context_processors.cart.count_cart',
+                'products.context_processors.favorite.favorite_count',
             ],
         },
     },
