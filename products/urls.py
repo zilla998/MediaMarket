@@ -4,7 +4,7 @@ from .views import (products_list, product_detail, homepage,
                     category_sort, category_filter, product_cart,
                     about_us, add_product_to_cart, remove_product_from_cart,
                     favorite_product, add_product_to_favorite, remove_product_to_favorite,
-                    product_checkout)
+                    product_checkout, users_order)
 
 app_name = "products"
 
@@ -26,4 +26,5 @@ urlpatterns = [
          name="remove_product_to_favorite"),
     path("checkout/", product_checkout, name="product_checkout"),
     # path('checkout/select-shipping/', select_shipping, name='select_shipping'),
+    path("users_order/", users_order, name="users_order")
 ]

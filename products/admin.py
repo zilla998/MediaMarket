@@ -46,7 +46,7 @@ class FavoriteAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'full_name', 'address', 'phone', 'email', 'status', 'total_price', 'create_at')
+    list_display = ("pk", 'user', 'full_name', 'address', 'phone', 'email', 'status', 'total_price', 'create_at')
     inlines = (ProductInOrderInlineModel,)
 
 

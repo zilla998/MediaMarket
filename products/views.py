@@ -1,3 +1,5 @@
+from enum import pickle_by_enum_name
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.dispatch import receiver
@@ -7,7 +9,7 @@ from django.db.models import Q
 
 from MediaMarket.settings import LOGIN_URL
 from .forms import OrderForm
-from .models import Product, CartItem, Favorite, Cart, ProductInCart, ProductInOrder
+from .models import Product, CartItem, Favorite, Cart, ProductInCart, ProductInOrder, Order
 
 
 @receiver(user_logged_in)
@@ -285,3 +287,20 @@ def product_checkout(request):
         'shipping_price': shipping_price,
         "form": form
     })
+
+
+def users_order(request):
+    if request.method == "POST":
+        status = request.POST.get("status").split("_")
+        order = Order.objects.get(pk=int(status[0]))
+        order.status = status[1]
+        order.save()
+
+
+    orders = Order.objects.all().order_by("-create_at")
+
+    status = orders[0]._meta.get_field("status").choices
+    cart = Cart.objects.get(user=request.user)
+    total_price = cart.total_price()
+
+    return render(request, 'products/users_order.html', {'orders': orders, 'total_price': total_price, "status": status})
