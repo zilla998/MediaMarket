@@ -3,7 +3,15 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
+from products.models import Order, ProductInOrder
 from users.forms import UserLoginForm, UserRegisterForm, UserRecoverPasswordForm
+from users.models import CustomUser
+
+
+def user_profile(request, pk):
+    user = CustomUser.objects.get(pk=pk)
+    orders = Order.objects.filter(user=user)
+    return render(request, 'users/profile.html', {'orders': orders, 'user': user})
 
 
 class UserLoginView(LoginView):
