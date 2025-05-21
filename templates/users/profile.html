@@ -9,17 +9,17 @@
           <h2 class="color-primary-dark mb-30">Профиль пользователя<br class="d-none d-lg-block">{{ user.username }}</h2>
         </div>
       </section>
-      <section class="section block-content-custome">
+      <section class="section block-content-customer">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 wow bounceIn">
               <ul class="menu-left">
-                <li> <a class="active" href="{% url 'users:user_profile' user.pk %}">Профиль</a></li>
-                <li> <a href="{% url 'users:user_profile_orders' user.pk %}">Мои заказы</a></li>
-                <li> <a href="{% url 'products:favorite_product' %}">Избранное</a></li>
-                <li> <a href="{% url 'users:user_profile_settings' %}">Настройки</a></li>
+                <li> <a class="{% if view_name == 'users.user_profile' %}active{% endif %}" href="{% url 'users:user_profile' user.pk %}">Профиль</a></li>
+                <li> <a class="{% if view_name == 'users:user_profile_orders' %}active{% endif %}" href="{% url 'users:user_profile_orders' user.pk %}">Мои заказы</a></li>
+                <li> <a class="{% if view_name == 'products:favorite_product' %}active{% endif %}" href="{% url 'products:favorite_product' %}">Избранное</a></li>
+                <li> <a class="{% if view_name == 'users:user_profile_settings' %}active{% endif %}" href="{% url 'users:user_profile_settings' %}">Настройки</a></li>
                   {% if user.is_superuser %}
-                <li> <a href="{% url 'products:users_order' %}">Заказы пользователей</a></li>
+                <li> <a class="{% if view_name == 'products:users_order' %}active{% endif %}" href="{% url 'products:users_order' %}">Заказы пользователей</a></li>
                   {% endif %}
                 <li> <form method="post" action="{% url 'users:logout' %}" class="ms-2">
                 {% csrf_token %}
