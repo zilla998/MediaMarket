@@ -15,7 +15,7 @@
             <div class="col-lg-3 wow bounceIn">
               <ul class="menu-left">
                 <li> <a class="active" href="{% url 'users:user_profile' user.pk %}">Профиль</a></li>
-                <li> <a href="{% url 'users:user_profile_orders' user.pk %}">Мои заказы</a></li>
+                <li> <a href="#">Мои заказы</a></li>
                 <li> <a href="{% url 'products:favorite_product' %}">Избранное</a></li>
                 <li> <a href="{% url 'users:user_profile_settings' %}">Настройки</a></li>
                   {% if user.is_superuser %}
@@ -29,22 +29,44 @@
             </div>
             <div class="col-lg-9 wow bounceIn">
               <div class="content-detail">
-                <h3>Мой профиль</h3>
+                <h3>Мои заказы</h3>
 
-                <div class="row">
-                  <div class="col-lg-6">
-                    <p class="text-17-medium">Имя:</p>
-                    <p class="text-17-medium">Фамилия:</p>
-                    <p class="text-17-medium">Email:</p>
-                    <p class="text-17-medium">Телефон:</p>
-                  </div>
-                  <div class="col-lg-6">
-                    <p class="text-17-medium">{{ user.first_name }}</p>
-                    <p class="text-17-medium">{{ user.last_name }}</p>
-                    <p class="text-17-medium">{{ user.email }}</p>
-                    <p class="text-17-medium">{{ user.phone_number }}</p>
-                  </div>
-                </div>
+                {% if orders %}
+                  {% for order in orders %}
+                    <div class="order-item mb-4">
+                      <h5>Заказ №{{ order.id }} от {{ order.create_at|date:"d.m.Y" }}</h5>
+                      <p>Статус: <span class="badge {% if order.status == 'new' %}bg-warning{% elif order.status == 'paid' %}bg-info{% elif order.status == 'sent' %}bg-primary{% elif order.status == 'done' %}bg-success{% else %}bg-danger{% endif %}">{{ order.get_status_display }}</span></p>
+                      <p>Сумма заказа: {{ order.total_price }} руб.</p>
+
+                      <div class="order-products">
+                        <h6>Товары в заказе:</h6>
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Товар</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item in order.productinorder_set.all %}
+                                <tr>
+                                  <td>{{ item.product.name }}</td>
+                                  <td>{{ item.amount }}</td>
+                                  <td>{{ item.total_product_price }} руб.</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  {% endfor %}
+                {% else %}
+                  <p>У вас пока нет заказов.</p>
+                {% endif %}
 
                 <div class="mt-25"><a class="btn btn-black" href="{% url 'products:products_list' %}">Продолжить покупки</a></div>
               </div>
