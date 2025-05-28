@@ -183,3 +183,14 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = "Товар в заказе"
         verbose_name_plural = "Товары в заказе"
+
+class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
+    rating = models.IntegerField(verbose_name="Рейтинг")
+    text = models.TextField(verbose_name="Текст отзыва")
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"

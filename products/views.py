@@ -52,6 +52,7 @@ def about_us(request):
 def products_list(request):
     query = request.GET.get('q', '')
     products = Product.objects.all()
+    print(products.query)
     if query:
         query_lower = query.lower()
         products = [product for product in products if query_lower in product.name.lower() or query_lower in product.description.lower()]
@@ -62,6 +63,18 @@ def products_list(request):
 
 def product_detail(request, pk):
     product = Product.objects.get(pk=pk)
+    if request.method == "POST":
+        quantity = request.POST.get('quantity')
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        product_in_cart, created = ProductInCart.objects.get_or_create(
+            cart=cart,
+            product=product
+        )
+        if created:
+            product_in_cart.amount = quantity
+        else:
+            product_in_cart.amount += int(quantity)
+        product_in_cart.save()
     return render(request, "products/product_detail.html", {
         "product": product
     })
@@ -304,3 +317,7 @@ def users_order(request):
     total_price = cart.total_price()
 
     return render(request, 'products/users_order.html', {'orders': orders, 'total_price': total_price, "status": status})
+
+
+def reviews(request):
+    pass

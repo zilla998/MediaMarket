@@ -60,6 +60,12 @@
                     <div class="list-sizes"><span class="item-size out-stock">XS</span><span class="item-size active">S</span><span class="item-size">M</span><span class="item-size">XL</span></div><a class="text-17-medium link-underline" href="#">Руководство по размерам</a>
                   </div>
                 </div>
+                  <form method="POST">
+                      {% csrf_token %}
+                      <label>Количество:</label>
+                      <input type="number" name="quantity" value="1" min="1" required>
+                      <button type="submit" class="btn btn-black">В корзину</button>
+                  </form>
                 <div class="block-quantity">
                   <div class="text-17 neutral-medium-dark mb-10">Количество</div>
                   <div class="box-form-cart">
