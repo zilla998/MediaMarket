@@ -1,11 +1,14 @@
-from products.models import Cart
+from products.models import ProductInCart
+
+from django.db.models import Sum
 
 
 def count_cart(request):
-
     cart = request.session.get('cart', {})
     if request.user.is_authenticated:
-        cart = Cart.objects.get(user=request.user).products.all()
+        cart = ProductInCart.objects.filter(cart__user=request.user).aggregate(total=Sum('amount'))['total'] or 0
+    else:
+        cart = sum(cart.values())
     return {
-        'cart_count': len(cart)
+        'cart_count': cart
     }
