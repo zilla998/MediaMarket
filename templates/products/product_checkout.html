@@ -14,16 +14,111 @@
             </div>
         </div>
         <section class="section block-cart">
-            <div class="container mb-100 mt-60">
+            <div class="mb-100 mt-60" style="width:100vw;max-width:100vw;margin-left:0;margin-right:0;">
 {#                <form action="#">#}
                     <div class="row mt-20">
-                        <div class="col-lg-6">
                             <div class="box-customer-login">
                                 Постоянный клиент? <a href="{% url "users:login" %}">Нажми сюда чтобы войти</a></div>
                             <div class="box-gift-coupon">
                                 У тебя есть промокод ? <a href="#">Нажми сюда чтобы ввести</a></div>
                             <div class="box-title-checkout mt-30">
                                 <h4 class="mb-25">Оформление заказа</h4>
+                                <div class="col-lg-6">
+                            <div class="box-detail-cart">
+                                <h4 class="mb-25">Ваш заказ</h4>
+                                <div class="box-info-cart">
+                                    <p class="text-17-medium text-uppercase">Товары</p>
+                                    <div class="box-info-checkout-inner">
+                                        {% comment %} {% if cart_items %} {% endcomment %}
+                                        {% for item in cart_items %}
+                                            <div class="list-items-cart">
+                                                <div class="item-cart">
+                                                    <div class="item-cart-image"><img
+                                                            src="{{ item.product.image.url }}"></div>
+
+                                                    <div class="item-cart-info">
+                                                        <div class="item-cart-info-1"><a class="text-17-medium"
+                                                                                         href="#">{{ item.product.name }}</a>
+
+                                                            <p class="box-color"><span
+                                                                    class="body-p2 neutral-medium-dark">Color: </span><span
+                                                                    class="body-p2 neutral-dark">Navy </span></p>
+                                                            <p class="box-size"><span
+                                                                    class="body-p2 neutral-medium-dark">Size:  </span><span
+                                                                    class="body-p2 neutral-dark">S  </span></p>
+                                                        </div>
+                                                        <div class="item-cart-info-2">
+                                                            <p class="body-p2">₽ {{ item.product.price }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+
+                                        <div class="box-info-cart-inner">
+                                                <p class="text-17-medium text-uppercase mb-15 neutral-medium-dark">
+                                                    Доставка</p>
+                                                <div class="list-radio">
+                                                    <form method="GET" action="{% url 'products:product_checkout' %}">
+                                                        <div class="item-radio">
+                                                            <label>
+                                                                <input
+                                                                        type="radio"
+                                                                        name="shipping"
+                                                                        value="direct"
+                                                                        checked
+                                                                        onchange="this.form.submit()"
+                                                                >
+                                                                Прямая доставка: ₽ {{ shipping_price.direct }}
+                                                            </label>
+                                                        </div>
+                                                        <div class="item-radio">
+                                                            <label>
+                                                                <input
+                                                                        type="radio"
+                                                                        name="shipping"
+                                                                        value="pickup"
+                                                                        onchange="this.form.submit()"
+                                                                >
+                                                                Самовывоз: ₽ {{ shipping_price.pickup }}
+                                                            </label>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between box-border-bottom">
+                                                <h5 class="neutral-medium-dark">Общая стоимость</h5>
+                                                <h5 class="color-9">{{ total_price }}</h5>
+                                            </div>
+                                                <p class="text-17-medium text-uppercase mb-15 neutral-medium-dark">
+                                                    Способ оплаты</p>
+                                                <div class="list-radio">
+                                                    <div class="item-radio">
+                                                        <label>
+                                                            <input type="radio" name="payment" checked="checked">Банковской картой
+                                                        </label>
+                                                    </div>
+                                                    <div class="item-radio">
+                                                        <label>
+                                                            <input type="radio" name="payment">СБП
+                                                        </label>
+                                                    </div>
+                                                    <div class="item-radio">
+                                                        <label>
+                                                            <input type="radio" name="payment">Наличными курьеру
+                                                        </label>
+                                                    </div>
+                                                    <div class="item-radio">
+                                                        <label>
+                                                            <input type="radio" name="payment">Рассрочкой под 0%
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
                                 <h5 class="mb-20">Контактная информация</h5>
                             </div>
                             <div class="box-form-checkout form-comment">
@@ -123,135 +218,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="box-detail-cart">
-                                <h4 class="mb-25">Ваш заказ</h4>
-                                <div class="box-info-cart">
-                                    <p class="text-17-medium text-uppercase">Товары</p>
-                                    <div class="box-info-checkout-inner">
-                                        {% comment %} {% if cart_items %} {% endcomment %}
-                                        {% for item in cart_items %}
-                                            <div class="list-items-cart">
-                                                <div class="item-cart">
-                                                    <div class="item-cart-image"><img
-                                                            src="{{ item.product.image.url }}"></div>
-                                                            
-                                                    <div class="item-cart-info">
-                                                        <div class="item-cart-info-1"><a class="text-17-medium"
-                                                                                         href="#">{{ item.product.name }}</a>
-                                                                                         
-                                                            <p class="box-color"><span
-                                                                    class="body-p2 neutral-medium-dark">Color: </span><span
-                                                                    class="body-p2 neutral-dark">Navy </span></p>
-                                                            <p class="box-size"><span
-                                                                    class="body-p2 neutral-medium-dark">Size:  </span><span
-                                                                    class="body-p2 neutral-dark">S  </span></p>
-                                                        </div>
-                                                        <div class="item-cart-info-2">
-                                                            <p class="body-p2">₽ {{ item.product.price }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between box-border-bottom">
-                                            <h5 class="neutral-medium-dark">Стоимость товаров</h5>
-                                            <h5 class="neutral-dark">₽ {{ sub_total_price }}</h5>
-                                        </div>
-                                        <div class="box-info-cart-inner">
-                                                <p class="text-17-medium text-uppercase mb-15 neutral-medium-dark">
-                                                    Доставка</p>
-                                                <div class="list-radio">
-                                                    <form method="GET" action="{% url 'products:product_checkout' %}">
-                                                        <div class="item-radio">
-                                                            <label>
-                                                                <input
-                                                                        type="radio"
-                                                                        name="shipping"
-                                                                        value="direct"
-                                                                        checked
-                                                                        onchange="this.form.submit()"
-                                                                >
-                                                                Прямая доставка: ₽ {{ shipping_price.direct }}
-                                                            </label>
-                                                        </div>
-                                                        <div class="item-radio">
-                                                            <label>
-                                                                <input
-                                                                        type="radio"
-                                                                        name="shipping"
-                                                                        value="pickup"
-                                                                        onchange="this.form.submit()"
-                                                                >
-                                                                Самовывоз: ₽ {{ shipping_price.pickup }}
-                                                            </label>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between box-border-bottom">
-                                                <h5 class="neutral-medium-dark">Общая стоимость</h5>
-                                                <h5 class="color-9">{{ total_price }}</h5>
-                                            </div>
-                                            <div class="box-other-link text-start box-border-bottom"><span
-                                                    class="text-17 link-green">Free shipping on orders over $200.00</span><a
-                                                    class="text-17" href="#">Continue Shopping</a></div>
-                                            <div class="box-payment-method">
-                                                <p class="text-17-medium text-uppercase mb-15 neutral-medium-dark">
-                                                    Shipping</p>
-                                                <div class="list-radio">
-                                                    <div class="item-radio">
-                                                        <label>
-                                                            <input type="radio" name="payment" checked="checked">Direct
-                                                            bank transfer
-                                                        </label>
-                                                        <p class="body-p2 neutral-medium-dark extra-info active">Please
-                                                            send a check to Store Name, Store Street, Store Town, Store
-                                                            State / County, Store Postcode.</p>
-                                                    </div>
-                                                    <div class="item-radio">
-                                                        <label>
-                                                            <input type="radio" name="payment">Cash on delivery
-                                                        </label>
-                                                        <p class="body-p2 neutral-medium-dark extra-info">Please send a
-                                                            check to Store Name, Store Street, Store Town, Store State /
-                                                            County, Store Postcode.</p>
-                                                    </div>
-                                                    <div class="item-radio">
-                                                        <label>
-                                                            <input type="radio" name="payment">Credit Card (Stripe)
-                                                        </label>
-                                                        <p class="body-p2 neutral-medium-dark extra-info">Please send a
-                                                            check to Store Name, Store Street, Store Town, Store State /
-                                                            County, Store Postcode.</p>
-                                                    </div>
-                                                    <div class="item-radio">
-                                                        <label>
-                                                            <input type="radio" name="payment">Paypal
-                                                        </label>
-                                                        <p class="body-p2 neutral-medium-dark extra-info">Please send a
-                                                            check to Store Name, Store Street, Store Town, Store State /
-                                                            County, Store Postcode.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-desc-checkout">
-                                                <p class="body-p2 neutral-medium-dark mb-20">Your personal data will be
-                                                    used to process your order, support your experience throughout this
-                                                    website, and for other purposes described in our privacy policy.</p>
-                                                <div class="form-group">
-                                                    <label>
-                                                        <input class="cb-left" type="checkbox">I agree to the website <a
-                                                            href="#">terms and conditions *</a>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="box-button-checkout"><a class="btn btn-black" href="#">Place
-                                                Order</a></div>
-                                            </div>
-                                            </div>
-                                            </div>
                                             </div>
                                             </form>
                                             </div>
