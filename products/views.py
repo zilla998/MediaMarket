@@ -1,7 +1,7 @@
 from enum import pickle_by_enum_name
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 
@@ -319,5 +319,24 @@ def users_order(request):
     return render(request, 'products/users_order.html', {'orders': orders, 'total_price': total_price, "status": status})
 
 
-def reviews(request):
-    pass
+def order_repeat(request, pk):
+    order = get_object_or_404(Order, pk=pk, user=request.user)
+
+    if request.method == "POST":
+        new_order = Order.objects.create(user=request.user, status='new', total_price=0)
+
+        for item in order.order_items.all():
+            ProductInOrder.objects.create(
+                order=new_order,
+                product=item.product,
+                amount=item.amount,
+            )
+
+        new_order.total_price = sum(
+            i.total_product_price() for i in new_order.order_items.all()
+        )
+        new_order.save()
+
+        return redirect('products:order_repeat', pk=request.user.pk)
+
+    return redirect('users:user_profile_orders', pk=request.user.pk)

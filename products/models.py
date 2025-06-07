@@ -150,7 +150,8 @@ class ProductInOrder(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
-        verbose_name = "Корзина"
+        verbose_name = "Корзина",
+        related_name="order_items",
     )
     product = models.ForeignKey(
         Product,
