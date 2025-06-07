@@ -321,17 +321,14 @@ def users_order(request):
 
 def order_repeat(request, pk):
     order = get_object_or_404(Order, pk=pk, user=request.user)
-
     if request.method == "POST":
         new_order = Order.objects.create(user=request.user, status='new', total_price=0)
-
         for item in order.order_items.all():
             ProductInOrder.objects.create(
                 order=new_order,
                 product=item.product,
                 amount=item.amount,
             )
-
         new_order.total_price = sum(
             i.total_product_price() for i in new_order.order_items.all()
         )
