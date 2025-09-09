@@ -33,9 +33,6 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
 
-
-
-
 class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
     products = models.ManyToManyField(
@@ -60,7 +57,7 @@ class ProductInCart(models.Model):
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
-        verbose_name = "Корзина"
+        verbose_name="Корзина"
     )
     product = models.ForeignKey(
         Product,
@@ -78,8 +75,6 @@ class ProductInCart(models.Model):
 
     def __str__(self):
         return f"{self.product} - {self.amount}"
-
-
 
 
 # Позиция товара в корзине пользователя
@@ -150,7 +145,7 @@ class ProductInOrder(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
-        verbose_name = "Корзина",
+        verbose_name="Корзина",
         related_name="order_items",
     )
     product = models.ForeignKey(
@@ -184,6 +179,7 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = "Товар в заказе"
         verbose_name_plural = "Товары в заказе"
+
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")

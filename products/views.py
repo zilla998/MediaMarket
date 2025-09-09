@@ -55,11 +55,13 @@ def products_list(request):
     print(products.query)
     if query:
         query_lower = query.lower()
-        products = [product for product in products if query_lower in product.name.lower() or query_lower in product.description.lower()]
+        products = [product for product in products if
+                    query_lower in product.name.lower() or query_lower in product.description.lower()]
     return render(request, "products/products_list.html", {
         'products': products,
         'query': query,
     })
+
 
 def product_detail(request, pk):
     product = Product.objects.get(pk=pk)
@@ -201,6 +203,7 @@ def favorite_product(request):
         'recommended_products': recomended_products,
     })
 
+
 @login_required(login_url=LOGIN_URL)
 def add_product_to_favorite(request, pk):
     if request.user.is_authenticated:
@@ -232,6 +235,7 @@ def remove_product_to_favorite(request, pk):
             request.session['favorite'] = favorite
 
     return redirect("products:favorite_product")
+
 
 def product_checkout(request):
     if request.method == "POST":
@@ -309,14 +313,14 @@ def users_order(request):
         order.status = status[1]
         order.save()
 
-
     orders = Order.objects.all().order_by("-create_at")
 
     status = orders[0]._meta.get_field("status").choices
     cart = Cart.objects.get(user=request.user)
     total_price = cart.total_price()
 
-    return render(request, 'products/users_order.html', {'orders': orders, 'total_price': total_price, "status": status})
+    return render(request, 'products/users_order.html',
+                  {'orders': orders, 'total_price': total_price, "status": status})
 
 
 def order_repeat(request, pk):

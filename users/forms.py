@@ -8,6 +8,7 @@ from .validators import phone_regex
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
     class Meta:
         model = get_user_model()
         fields = ['username', 'password']
@@ -20,11 +21,12 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'phone','password1', 'password2', 'birth_date']
+        fields = ['username', 'phone', 'password1', 'password2', 'birth_date']
 
 
 class UserRecoverPasswordForm(forms.Form):
     email = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={'class': 'form-input'}))
+
     class Meta:
         model = get_user_model()
         fields = ['email']
@@ -43,4 +45,5 @@ class UserProfileSettingsForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'email', 'phone', 'password', 'password2', 'avatar', 'birth_date', 'gender']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'password', 'password2', 'avatar', 'birth_date',
+                  'gender']

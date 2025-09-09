@@ -17,7 +17,6 @@ class ProductInCartInlineModel(admin.TabularInline):
     extra = 2
 
 
-
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     list_display = ("pk", "user")
