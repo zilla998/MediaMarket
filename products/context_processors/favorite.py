@@ -1,5 +1,6 @@
 from products.models import Favorite
 
+
 def favorite_count(request):
     count = 0
     if request.user.is_authenticated:

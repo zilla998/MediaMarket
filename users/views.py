@@ -3,8 +3,13 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from products.models import Order, ProductInOrder
-from users.forms import UserLoginForm, UserRegisterForm, UserRecoverPasswordForm, UserProfileSettingsForm
+from products.models import Order
+from users.forms import (
+    UserLoginForm,
+    UserRegisterForm,
+    UserRecoverPasswordForm,
+    UserProfileSettingsForm
+)
 from users.models import CustomUser
 
 
@@ -16,7 +21,11 @@ def user_profile(request, pk):
 def user_profile_orders(request, pk):
     user = CustomUser.objects.get(pk=pk)
     orders = Order.objects.filter(user=user).order_by('-create_at')
-    return render(request, 'users/profile_orders.html', {'orders': orders, 'user': user})
+    return render(
+        request,
+        'users/profile_orders.html',
+        {'orders': orders, 'user': user}
+    )
 
 
 class UserLoginView(LoginView):
@@ -42,6 +51,3 @@ class UserProfileSettingsView(CreateView):
     form_class = UserProfileSettingsForm
     template_name = "users/profile_settings.html"
     extra_context = {"title": "Настройки профиля"}
-
-    # def get_success_url(self):
-    #     return reverse_lazy('users:user_profile', kwargs={'pk': self.object.pk})
