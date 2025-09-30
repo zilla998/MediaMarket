@@ -4,16 +4,15 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('users', '0003_alter_customuser_email_confirm_and_more'),
-    ]
+    dependencies = [("users", "0003_alter_customuser_email_confirm_and_more")]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='gender',
-            field=models.CharField(choices=[('m', 'male'), ('f', 'female')], default=True),
+            model_name="customuser",
+            name="gender",
+            field=models.CharField(
+                choices=[("m", "male"), ("f", "female")], default=True
+            ),
             preserve_default=False,
-        ),
+        )
     ]

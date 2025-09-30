@@ -1,0 +1,56 @@
+[tool.black]
+# Длина строки - современный стандарт 88 символов (рекомендация Black)
+line-length = 88
+
+# Целевые версии Python
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+# Включить превью функции для новейших возможностей форматирования
+preview = true
+
+# Исключить файлы и директории
+extend-exclude = '''
+/(
+    # Стандартные исключения
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+  | node_modules
+  | venv
+  | env
+  | ENV
+  | \.pytest_cache
+)/
+'''
+
+# Включить экспериментальные функции для строковой нормализации
+skip-string-normalization = false
+
+# Быстрая обработка (не проверять файлы без изменений)
+fast = true
+
+
+[tool.ruff]
+select = ["E", "F", "I", "B", "ANN"]
+exclude = [
+  ".git",
+  "venv",
+  "__pycache__",
+  "migrations",
+  ".ruff_cache"
+]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"test_*.py" = ["ANN"]
+"migrations/*.py" = ["ALL"]

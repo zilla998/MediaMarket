@@ -5,28 +5,54 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('products', '0004_alter_cart_options_alter_productincart_options_and_more'),
+        ("products", "0004_alter_cart_options_alter_productincart_options_and_more")
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ProductInOrder',
+            name="ProductInOrder",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.IntegerField(default=1, verbose_name='Кол-во')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.order', verbose_name='Корзина')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product', verbose_name='Продукт')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("amount", models.IntegerField(default=1, verbose_name="Кол-во")),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.order",
+                        verbose_name="Корзина",
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.product",
+                        verbose_name="Продукт",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Продукты в заказе',
-                'verbose_name_plural': 'Продукты в заказах',
+                "verbose_name": "Продукты в заказе",
+                "verbose_name_plural": "Продукты в заказах",
             },
         ),
         migrations.AddField(
-            model_name='order',
-            name='products',
-            field=models.ManyToManyField(related_name='orders', through='products.ProductInOrder', to='products.product', verbose_name='Продукты'),
+            model_name="order",
+            name="products",
+            field=models.ManyToManyField(
+                related_name="orders",
+                through="products.ProductInOrder",
+                to="products.product",
+                verbose_name="Продукты",
+            ),
         ),
     ]

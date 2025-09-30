@@ -8,8 +8,7 @@ class UserLoginForm(AuthenticationForm):
         label="Логин", widget=forms.TextInput(attrs={"class": "form-input"})
     )
     password = forms.CharField(
-        label="Пароль",
-        widget=forms.PasswordInput(attrs={"class": "form-input"}),
+        label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"})
     )
 
     class Meta:
@@ -22,12 +21,10 @@ class UserRegisterForm(UserCreationForm):
         label="Логин", widget=forms.TextInput(attrs={"class": "form-input"})
     )
     password1 = forms.CharField(
-        label="Пароль",
-        widget=forms.PasswordInput(attrs={"class": "form-input"}),
+        label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"})
     )
     password2 = forms.CharField(
-        label="Повтор пароля",
-        widget=forms.PasswordInput(attrs={"class": "form-input"}),
+        label="Повтор пароля", widget=forms.PasswordInput(attrs={"class": "form-input"})
     )
 
     class Meta:
@@ -59,19 +56,16 @@ class UserProfileSettingsForm(forms.ModelForm):
         label="Телефон", widget=forms.TextInput(attrs={"class": "form-input"})
     )
     password = forms.CharField(
-        label="Пароль",
-        widget=forms.PasswordInput(attrs={"class": "form-input"}),
+        label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"})
     )
     password2 = forms.CharField(
-        label="Повтор пароля",
-        widget=forms.PasswordInput(attrs={"class": "form-input"}),
+        label="Повтор пароля", widget=forms.PasswordInput(attrs={"class": "form-input"})
     )
     avatar = forms.ImageField(
         label="Аватар", widget=forms.FileInput(attrs={"class": "form-input"})
     )
     birth_date = forms.DateField(
-        label="Дата рождения",
-        widget=forms.DateInput(attrs={"class": "form-input"}),
+        label="Дата рождения", widget=forms.DateInput(attrs={"class": "form-input"})
     )
     gender = forms.BooleanField(
         label="Пол", widget=forms.CheckboxInput(attrs={"class": "form-input"})

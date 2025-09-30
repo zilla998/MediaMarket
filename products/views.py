@@ -57,15 +57,11 @@ def products_list(request):
         products = [
             product
             for product in products
-            if query_lower in product.name.lower() or query_lower in product.description.lower()
+            if query_lower in product.name.lower()
+            or query_lower in product.description.lower()
         ]
     return render(
-        request,
-        "products/products_list.html",
-        {
-            "products": products,
-            "query": query,
-        },
+        request, "products/products_list.html", {"products": products, "query": query}
     )
 
 
@@ -96,9 +92,7 @@ def category_sort(request):
     elif sort_param == "date":
         products = products.order_by("-create_at")
 
-    return render(
-        request, "products/products_list.html", {"products": products}
-    )
+    return render(request, "products/products_list.html", {"products": products})
 
 
 def category_filter(request):
@@ -125,10 +119,7 @@ def category_filter(request):
     return render(
         request,
         "products/products_list.html",
-        {
-            "products": products,
-            "current_category": current_category,
-        },
+        {"products": products, "current_category": current_category},
     )
 
 
@@ -165,8 +156,7 @@ def add_product_to_cart(request, pk):
         cart, created = Cart.objects.get_or_create(user=request.user)
 
         product_in_cart, created = ProductInCart.objects.get_or_create(
-            cart=cart,
-            product=product,
+            cart=cart, product=product
         )
 
         if not created:
@@ -222,8 +212,7 @@ def add_product_to_favorite(request, pk):
     if request.user.is_authenticated:
         product = Product.objects.get(pk=pk)
         favorite_item, created = Favorite.objects.get_or_create(
-            user=request.user,
-            product=product,
+            user=request.user, product=product
         )
 
         if not created:
@@ -290,10 +279,7 @@ def product_checkout(request):
             total_price += product.total_price
             cart_items.append(product)
 
-    shipping_price = {
-        "direct": 500,
-        "pickup": 1000,
-    }
+    shipping_price = {"direct": 500, "pickup": 1000}
 
     shipping_type = request.GET.get("shipping")
     print(shipping_type)
@@ -339,14 +325,10 @@ def users_order(request):
 def order_repeat(request, pk):
     order = get_object_or_404(Order, pk=pk, user=request.user)
     if request.method == "POST":
-        new_order = Order.objects.create(
-            user=request.user, status="new", total_price=0
-        )
+        new_order = Order.objects.create(user=request.user, status="new", total_price=0)
         for item in order.order_items.all():
             ProductInOrder.objects.create(
-                order=new_order,
-                product=item.product,
-                amount=item.amount,
+                order=new_order, product=item.product, amount=item.amount
             )
         new_order.total_price = sum(
             i.total_product_price() for i in new_order.order_items.all()

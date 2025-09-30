@@ -5,38 +5,51 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('products', '0003_cart_productincart_cart_products'),
-    ]
+    dependencies = [("products", "0003_cart_productincart_cart_products")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='cart',
-            options={'verbose_name': 'Корзины', 'verbose_name_plural': 'Корзины'},
+            name="cart",
+            options={"verbose_name": "Корзины", "verbose_name_plural": "Корзины"},
         ),
         migrations.AlterModelOptions(
-            name='productincart',
-            options={'verbose_name': 'Продукты в корзине', 'verbose_name_plural': 'Продукты в корзинах'},
+            name="productincart",
+            options={
+                "verbose_name": "Продукты в корзине",
+                "verbose_name_plural": "Продукты в корзинах",
+            },
         ),
         migrations.AlterField(
-            model_name='cart',
-            name='products',
-            field=models.ManyToManyField(related_name='carts', through='products.ProductInCart', to='products.product', verbose_name='Продукты'),
+            model_name="cart",
+            name="products",
+            field=models.ManyToManyField(
+                related_name="carts",
+                through="products.ProductInCart",
+                to="products.product",
+                verbose_name="Продукты",
+            ),
         ),
         migrations.AlterField(
-            model_name='productincart',
-            name='amount',
-            field=models.IntegerField(default=1, verbose_name='Кол-во'),
+            model_name="productincart",
+            name="amount",
+            field=models.IntegerField(default=1, verbose_name="Кол-во"),
         ),
         migrations.AlterField(
-            model_name='productincart',
-            name='cart',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.cart', verbose_name='Корзина'),
+            model_name="productincart",
+            name="cart",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.cart",
+                verbose_name="Корзина",
+            ),
         ),
         migrations.AlterField(
-            model_name='productincart',
-            name='product',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product', verbose_name='Продукт'),
+            model_name="productincart",
+            name="product",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.product",
+                verbose_name="Продукт",
+            ),
         ),
     ]

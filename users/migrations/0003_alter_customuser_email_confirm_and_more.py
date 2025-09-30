@@ -4,35 +4,45 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('users', '0002_alter_customuser_address_default_and_more'),
-    ]
+    dependencies = [("users", "0002_alter_customuser_address_default_and_more")]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='email_confirm',
-            field=models.BooleanField(default=False, verbose_name='Подтверждение почты'),
+            model_name="customuser",
+            name="email_confirm",
+            field=models.BooleanField(
+                default=False, verbose_name="Подтверждение почты"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='gender',
-            field=models.BooleanField(blank=True, default=False, null=True, verbose_name='Гендер'),
+            model_name="customuser",
+            name="gender",
+            field=models.BooleanField(
+                blank=True, default=False, null=True, verbose_name="Гендер"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='is_banned',
-            field=models.BooleanField(default=False, verbose_name='Заблокирован ли пользователь'),
+            model_name="customuser",
+            name="is_banned",
+            field=models.BooleanField(
+                default=False, verbose_name="Заблокирован ли пользователь"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='newsletter_subscribed',
-            field=models.BooleanField(blank=True, default=False, null=True, verbose_name='Согласие на рассылку'),
+            model_name="customuser",
+            name="newsletter_subscribed",
+            field=models.BooleanField(
+                blank=True,
+                default=False,
+                null=True,
+                verbose_name="Согласие на рассылку",
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='phone_confirm',
-            field=models.BooleanField(default=False, verbose_name='Подтверждение телефона'),
+            model_name="customuser",
+            name="phone_confirm",
+            field=models.BooleanField(
+                default=False, verbose_name="Подтверждение телефона"
+            ),
         ),
     ]

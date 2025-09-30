@@ -5,20 +5,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('users', '0006_alter_customuser_birth_date'),
-    ]
+    dependencies = [("users", "0006_alter_customuser_birth_date")]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='birth_date',
-            field=models.DateField(blank=True, null=True, verbose_name='День рождения'),
+            model_name="customuser",
+            name="birth_date",
+            field=models.DateField(blank=True, null=True, verbose_name="День рождения"),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='phone',
-            field=models.CharField(max_length=255, validators=[django.core.validators.RegexValidator(message="Номер должен быть в формате '+999999999'. До 15 цифр.", regex='^\\+?1?\\d{9,15}$')], verbose_name='Номер телефона'),
+            model_name="customuser",
+            name="phone",
+            field=models.CharField(
+                max_length=255,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Номер должен быть в формате '+999999999'. До 15 цифр.",
+                        regex="^\\+?1?\\d{9,15}$",
+                    )
+                ],
+                verbose_name="Номер телефона",
+            ),
         ),
     ]

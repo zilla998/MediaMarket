@@ -4,40 +4,43 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('users', '0001_initial'),
-    ]
+    dependencies = [("users", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='address_default',
-            field=models.TextField(blank=True, null=True, verbose_name='Адрес'),
+            model_name="customuser",
+            name="address_default",
+            field=models.TextField(blank=True, null=True, verbose_name="Адрес"),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='users_avatar/', verbose_name='Аватар'),
+            model_name="customuser",
+            name="avatar",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="users_avatar/", verbose_name="Аватар"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='birth_date',
-            field=models.DateField(blank=True, null=True, verbose_name='День рождения'),
+            model_name="customuser",
+            name="birth_date",
+            field=models.DateField(blank=True, null=True, verbose_name="День рождения"),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='gender',
-            field=models.BooleanField(blank=True, null=True, verbose_name='Гендер'),
+            model_name="customuser",
+            name="gender",
+            field=models.BooleanField(blank=True, null=True, verbose_name="Гендер"),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='newsletter_subscribed',
-            field=models.BooleanField(blank=True, null=True, verbose_name='Согласие на рассылку'),
+            model_name="customuser",
+            name="newsletter_subscribed",
+            field=models.BooleanField(
+                blank=True, null=True, verbose_name="Согласие на рассылку"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='notes_admin',
-            field=models.TextField(blank=True, null=True, verbose_name='Внутренние заметки админа'),
+            model_name="customuser",
+            name="notes_admin",
+            field=models.TextField(
+                blank=True, null=True, verbose_name="Внутренние заметки админа"
+            ),
         ),
     ]

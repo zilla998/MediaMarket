@@ -4,30 +4,33 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('products', '0001_initial'),
-    ]
+    dependencies = [("products", "0001_initial")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name': 'Категория', 'verbose_name_plural': 'Категории'},
+            name="category",
+            options={"verbose_name": "Категория", "verbose_name_plural": "Категории"},
         ),
         migrations.AlterModelOptions(
-            name='favorite',
-            options={'verbose_name': 'Избранный товар', 'verbose_name_plural': 'Избранные товары'},
+            name="favorite",
+            options={
+                "verbose_name": "Избранный товар",
+                "verbose_name_plural": "Избранные товары",
+            },
         ),
         migrations.AlterModelOptions(
-            name='order',
-            options={'verbose_name': 'Заказ', 'verbose_name_plural': 'Заказы'},
+            name="order",
+            options={"verbose_name": "Заказ", "verbose_name_plural": "Заказы"},
         ),
         migrations.AlterModelOptions(
-            name='orderitem',
-            options={'verbose_name': 'Товар в заказе', 'verbose_name_plural': 'Товары в заказе'},
+            name="orderitem",
+            options={
+                "verbose_name": "Товар в заказе",
+                "verbose_name_plural": "Товары в заказе",
+            },
         ),
         migrations.AlterModelOptions(
-            name='product',
-            options={'verbose_name': 'Товар', 'verbose_name_plural': 'Товары'},
+            name="product",
+            options={"verbose_name": "Товар", "verbose_name_plural": "Товары"},
         ),
     ]

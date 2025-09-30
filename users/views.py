@@ -8,23 +8,22 @@ from users.forms import (
     UserLoginForm,
     UserRegisterForm,
     UserRecoverPasswordForm,
-    UserProfileSettingsForm
+    UserProfileSettingsForm,
 )
 from users.models import CustomUser
 
 
+
 def user_profile(request, pk):
     user = CustomUser.objects.get(pk=pk)
-    return render(request, 'users/profile.html', {'user': user})
+    return render(request, "users/profile.html", {"user": user})
 
 
 def user_profile_orders(request, pk):
     user = CustomUser.objects.get(pk=pk)
-    orders = Order.objects.filter(user=user).order_by('-create_at')
+    orders = Order.objects.filter(user=user).order_by("-create_at")
     return render(
-        request,
-        'users/profile_orders.html',
-        {'orders': orders, 'user': user}
+        request, "users/profile_orders.html", {"orders": orders, "user": user}
     )
 
 

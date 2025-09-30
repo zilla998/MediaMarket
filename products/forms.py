@@ -6,7 +6,7 @@ class OrderForm(forms.ModelForm):
     # phone = forms.CharField(max_length=255, label="Номер телефона")
     class Meta:
         model = Order
-        fields = ('full_name', "address", "phone", "email")
+        fields = ("full_name", "address", "phone", "email")
         widgets = {
             "full_name": forms.TextInput(attrs={"class": "form-control"}),
             "address": forms.TextInput(attrs={"class": "form-control"}),

@@ -5,15 +5,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    dependencies = [
-        ('products', '0006_review'),
-    ]
+    dependencies = [("products", "0006_review")]
 
     operations = [
         migrations.AlterField(
-            model_name='productinorder',
-            name='order',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_items', to='products.order', verbose_name='Корзина'),
-        ),
+            model_name="productinorder",
+            name="order",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="order_items",
+                to="products.order",
+                verbose_name="Корзина",
+            ),
+        )
     ]
