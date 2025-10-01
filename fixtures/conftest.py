@@ -3,6 +3,13 @@ import pytest
 from products.models import Product, Category, Cart, Order
 from users.models import CustomUser
 
+from pytest_factoryboy import register
+from fixtures.factories import CustomUserFactory, ProductFactory, CartFactory
+
+register(CustomUserFactory)
+register(ProductFactory)
+register(CartFactory)
+
 
 @pytest.fixture
 def user(db):

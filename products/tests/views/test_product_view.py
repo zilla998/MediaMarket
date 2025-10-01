@@ -1,41 +1,55 @@
 import pytest
 
-from products.models import Product, Category, Cart
-from users.models import CustomUser
+from fixtures.factories import (
+    CustomUserFactory,
+    ProductFactory,
+    CartFactory,
+)
 
 
-@pytest.mark.django_db
-class TestUserAddProductToCart:
-    @pytest.fixture(scope="class", autouse=True)
-    def setUp(self, django_db_setup, django_db_blocker):
-        with django_db_blocker.unblock():
-            TestUserAddProductToCart.user = CustomUser.objects.create(
-                username="test_user", password="ahwbdiu"
-            )
-            category = Category.objects.create(name="test_cat", slug="test-cat")
-            TestUserAddProductToCart.product = Product.objects.create(
-                name="test_product",
-                description="test_desc",
-                price="100",
-                image="test_image",
-                category=category,
-            )
-            TestUserAddProductToCart.cart = Cart.objects.create(
-                user=TestUserAddProductToCart.user
-            )
+# @pytest.mark.django_db
+# class TestUserAddProductToCart:
+#     @pytest.fixture(scope="class", autouse=True)
+#     def setUp(
+#         self,
+#         request,
+#         django_db_setup,
+#         django_db_blocker,
+#     ):
+#         with django_db_blocker.unblock():
+#             request.cls.user = CustomUserFactory(username="test_user")
+#             request.cls.product = ProductFactory(name="test_prod", price=250)
+#             request.cls.cart = CartFactory(user=request.cls.user)
+#
+#     def test_user_creation(self):
+#         assert self.user.username == "test_user"
+#
+#     def test_product_creation(self):
+#         assert self.product.name == "test_prod"
+#         assert self.product.price == 250
+#
+#     def test_add_product_to_card(self):
+#         self.cart.products.add(self.product)
+#         assert self.product in self.cart.products.all()
 
-        yield
 
-        with django_db_blocker.unblock():
-            Cart.objects.filter(user__username="test_user").delete()
-            Product.objects.filter(name="test_product").delete()
-            Category.objects.filter(name="test_cat").delete()
-            CustomUser.objects.filter(username="test_user").delete()
+from django.test import TestCase
 
-    def test_user_creation(self):
+
+class TestUserAddProductToCart(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = CustomUserFactory(username="test_user")
+        cls.product = ProductFactory(name="test_prod", price=250)
+        cls.cart = CartFactory(user=cls.user)
+
+    def test_correct_create_user(self):
         assert self.user.username == "test_user"
-        self.user.username = "user_test"
-        assert self.user.username == "user_test"
+
+    def test_product_creation(self):
+        assert self.product.name == "test_prod"
+        assert self.product.price == 250
 
     def test_add_product_to_card(self):
         self.cart.products.add(self.product)

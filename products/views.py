@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
+from django.db import connection
 
 
 from MediaMarket.settings import LOGIN_URL
@@ -51,7 +54,6 @@ def about_us(request):
 def products_list(request):
     query = request.GET.get("q", "")
     products = Product.objects.all()
-    print(products.query)
     if query:
         query_lower = query.lower()
         products = [
@@ -60,9 +62,11 @@ def products_list(request):
             if query_lower in product.name.lower()
             or query_lower in product.description.lower()
         ]
-    return render(
+    response = render(
         request, "products/products_list.html", {"products": products, "query": query}
     )
+    print(f"products_list executed {len(connection.queries)} SQL queries")
+    return response
 
 
 def product_detail(request, pk):
