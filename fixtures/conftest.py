@@ -12,6 +12,11 @@ register(CartFactory)
 
 
 @pytest.fixture
+def custom_user_factory(db):
+    return CustomUserFactory
+
+
+@pytest.fixture
 def user(db):
     return CustomUser.objects.create(username="test_user", password="kjwandjk")
 
