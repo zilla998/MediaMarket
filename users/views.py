@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -13,12 +15,13 @@ from users.forms import (
 from users.models import CustomUser
 
 
-
+@login_required
 def user_profile(request, pk):
     user = CustomUser.objects.get(pk=pk)
     return render(request, "users/profile.html", {"user": user})
 
 
+@login_required
 def user_profile_orders(request, pk):
     user = CustomUser.objects.get(pk=pk)
     orders = Order.objects.filter(user=user).order_by("-create_at")
@@ -46,7 +49,7 @@ class UserRecoverPasswordView(CreateView):
     extra_context = {"title": "Восстановление пароля"}
 
 
-class UserProfileSettingsView(CreateView):
+class UserProfileSettingsView(LoginRequiredMixin, CreateView):
     form_class = UserProfileSettingsForm
     template_name = "users/profile_settings.html"
     extra_context = {"title": "Настройки профиля"}

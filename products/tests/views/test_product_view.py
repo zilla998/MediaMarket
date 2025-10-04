@@ -1,11 +1,4 @@
-import pytest
-
-from fixtures.factories import (
-    CustomUserFactory,
-    ProductFactory,
-    CartFactory,
-)
-
+# import pytest
 
 # @pytest.mark.django_db
 # class TestUserAddProductToCart:
@@ -31,9 +24,9 @@ from fixtures.factories import (
 #     def test_add_product_to_card(self):
 #         self.cart.products.add(self.product)
 #         assert self.product in self.cart.products.all()
-
-
 from django.test import TestCase
+
+from fixtures.factories import CartFactory, CustomUserFactory, ProductFactory
 
 
 class TestUserAddProductToCart(TestCase):
