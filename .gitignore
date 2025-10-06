@@ -56,3 +56,9 @@ local_settings.py
 # 10. ОС‑специфичные файлы
 .DS_Store
 Thumbs.db
+/ANALIZATOR.md
+/products/tests/analize.md
+/factory-boy.md
+/products/tests/views/scope_about.md
+/products/tests/views/test_about.md
+/products/tests/views/yield_about.md
