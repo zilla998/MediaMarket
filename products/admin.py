@@ -5,9 +5,7 @@ from products.models import (
     Category,
     Favorite,
     Order,
-    OrderItem,
     Cart,
-    # CartItem,
     ProductInCart,
     ProductInOrder,
 )
@@ -39,11 +37,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "slug")
 
 
-# @admin.register(CartItem)
-# class CartItemAdmin(admin.ModelAdmin):
-#     list_display = ("user", "product", "quantity", "added_at")
-
-
 @admin.register(Favorite)
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ("user", "product", "added_at")
@@ -63,8 +56,3 @@ class OrderAdmin(admin.ModelAdmin):
         "create_at",
     )
     inlines = (ProductInOrderInlineModel,)
-
-
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ("order", "product", "quantity", "price")

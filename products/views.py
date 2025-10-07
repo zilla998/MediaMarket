@@ -11,7 +11,6 @@ from MediaMarket.settings import LOGIN_URL
 from .forms import OrderForm
 from .models import (
     Product,
-    # CartItem,
     Favorite,
     Cart,
     ProductInCart,
