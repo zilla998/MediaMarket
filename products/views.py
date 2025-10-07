@@ -11,7 +11,7 @@ from MediaMarket.settings import LOGIN_URL
 from .forms import OrderForm
 from .models import (
     Product,
-    CartItem,
+    # CartItem,
     Favorite,
     Cart,
     ProductInCart,
@@ -28,7 +28,7 @@ def transfer_cart_items(sender, user, request, **kwargs):
         for product_id, quantity in session_cart.items():
             try:
                 product = Product.objects.get(pk=product_id)
-                cart_item, created = CartItem.objects.get_or_create(
+                cart_item, created = ProductInCart.objects.get_or_create(
                     user=user, product=product, defaults={"quantity": quantity}
                 )
 
@@ -78,9 +78,9 @@ def product_detail(request, pk):
             cart=cart, product=product
         )
         if created:
-            product_in_cart.amount = quantity
+            product_in_cart.quantity = quantity
         else:
-            product_in_cart.amount += int(quantity)
+            product_in_cart.quantity += int(quantity)
         product_in_cart.save()
     return render(request, "products/product_detail.html", {"product": product})
 
@@ -164,7 +164,7 @@ def add_product_to_cart(request, pk):
         )
 
         if not created:
-            product_in_cart.amount += 1
+            product_in_cart.quantity += 1
             product_in_cart.save()
 
     else:
@@ -255,7 +255,7 @@ def product_checkout(request):
             order.save()
             for item in cart_items:
                 ProductInOrder.objects.create(
-                    order=order, product=item.product, amount=item.amount
+                    order=order, product=item.product, quantity=item.quantity
                 )
             cart.products.clear()
             return redirect("products:homepage")
@@ -271,7 +271,7 @@ def product_checkout(request):
         cart_items = ProductInCart.objects.filter(cart=cart)
         total_price = 0
         for cart_item in cart_items:
-            cart_item.total_price = cart_item.product.price * cart_item.amount
+            cart_item.total_price = cart_item.product.price * cart_item.quantity
             total_price += cart_item.total_price
     else:
         cart_item = request.session.get("cart", {})
@@ -332,7 +332,7 @@ def order_repeat(request, pk):
         new_order = Order.objects.create(user=request.user, status="new", total_price=0)
         for item in order.order_items.all():
             ProductInOrder.objects.create(
-                order=new_order, product=item.product, amount=item.amount
+                order=new_order, product=item.product, quantity=item.quantity
             )
         new_order.total_price = sum(
             i.total_product_price() for i in new_order.order_items.all()

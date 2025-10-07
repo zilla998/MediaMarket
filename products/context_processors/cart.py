@@ -8,7 +8,7 @@ def count_cart(request):
     if request.user.is_authenticated:
         cart = (
             ProductInCart.objects.filter(cart__user=request.user).aggregate(
-                total=Sum("amount")
+                total=Sum("quantity")
             )["total"]
             or 0
         )

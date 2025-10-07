@@ -50,43 +50,41 @@ class Cart(models.Model):
     def total_price(self):
         return sum(item.price for item in self.products.all())
 
-    # def __str__(self):
-    #     return self.products
-
 
 class ProductInCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name="Корзина")
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )
-    amount = models.IntegerField(default=1, verbose_name="Кол-во")
+    quantity = models.IntegerField(default=1, verbose_name="Кол-во товара")
+    added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     class Meta:
         verbose_name = "Продукты в корзине"
         verbose_name_plural = "Продукты в корзинах"
 
     def __str__(self):
-        return f"{self.product} - {self.amount}"
+        return f"{self.product} - {self.quantity}"
 
     def total_product_price(self):
-        return self.product.price * self.amount
+        return self.product.price * self.quantity
 
 
 # Позиция товара в корзине пользователя
-class CartItem(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь"
-    )
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
-    quantity = models.IntegerField(verbose_name="Кол-во")
-    added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
-
-    class Meta:
-        verbose_name = "Позиция в корзине"
-        verbose_name_plural = "Позиции в корзине"
-
-    def __str__(self):
-        return f"{self.product.name} - {self.quantity}"
+# class CartItem(models.Model):
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь"
+#     )
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
+#     quantity = models.IntegerField(verbose_name="Кол-во")
+#     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
+#
+#     class Meta:
+#         verbose_name = "Позиция в корзине"
+#         verbose_name_plural = "Позиции в корзине"
+#
+#     def __str__(self):
+#         return f"{self.product.name} - {self.quantity}"
 
 
 # Избранные товары пользователя
@@ -157,17 +155,17 @@ class ProductInOrder(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )
-    amount = models.IntegerField(default=1, verbose_name="Кол-во")
+    quantity = models.IntegerField(default=1, verbose_name="Кол-во")
 
     class Meta:
         verbose_name = "Продукты в заказе"
         verbose_name_plural = "Продукты в заказах"
 
     def __str__(self):
-        return f"{self.product} - {self.amount}"
+        return f"{self.product} - {self.quantity}"
 
     def total_product_price(self):
-        return self.product.price * self.amount
+        return self.product.price * self.quantity
 
 
 # Привязка товаров к заказу

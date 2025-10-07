@@ -3,11 +3,11 @@ from django.contrib import admin
 from products.models import (
     Product,
     Category,
-    CartItem,
     Favorite,
     Order,
     OrderItem,
     Cart,
+    # CartItem,
     ProductInCart,
     ProductInOrder,
 )
@@ -39,9 +39,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "slug")
 
 
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ("user", "product", "quantity", "added_at")
+# @admin.register(CartItem)
+# class CartItemAdmin(admin.ModelAdmin):
+#     list_display = ("user", "product", "quantity", "added_at")
 
 
 @admin.register(Favorite)

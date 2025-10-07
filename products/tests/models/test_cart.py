@@ -1,4 +1,4 @@
-from products.models import Product, Cart, ProductInCart, CartItem
+from products.models import Product, Cart, ProductInCart
 
 from fixtures.conftest import product, user, cart
 
@@ -21,12 +21,7 @@ def test_cart_str_method(db, product, cart):
 def test_product_in_cart_str_method(db, product, cart):
     cart.products.add(product)
     get_prod = ProductInCart.objects.first()
-    assert str(get_prod) == f"{product} - {get_prod.amount}"
-
-
-def test_cart_item_str_method(db, product, user):
-    cart_item = CartItem.objects.create(user=user, product=product, quantity=1)
-    assert str(cart_item) == f"{product.name} - 1"
+    assert str(get_prod) == f"{product} - {get_prod.quantity}"
 
 
 def test_cart_user_relationship(db, user, cart):
@@ -54,16 +49,5 @@ def test_product_in_cart_creation(db, cart, product):
     get_prod = ProductInCart.objects.first()
     assert get_prod.product == product
     assert get_prod.cart == cart
-    assert get_prod.amount == 1
-    assert get_prod.total_product_price() == product.price * get_prod.amount
-
-
-def test_cart_item_creation(db, user, product):
-    CartItem.objects.create(user=user, product=product, quantity=1)
-
-    assert CartItem.objects.count() == 1
-
-    get_cartitem = CartItem.objects.first()
-    assert get_cartitem.user == user
-    assert get_cartitem.product == product
-    assert get_cartitem.quantity == 1
+    assert get_prod.quantity == 1
+    assert get_prod.total_product_price() == product.price * get_prod.quantity

@@ -89,7 +89,7 @@
                               {% for item in order.productinorder_set.all %}
                                 <tr>
                                   <td>{{ item.product.name }}</td>
-                                  <td>{{ item.amount }}</td>
+                                  <td>{{ item.quantity }}</td>
                                   <td>{{ item.total_product_price }} руб.</td>
                                 </tr>
                               {% endfor %}
