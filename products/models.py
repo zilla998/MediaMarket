@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import F, Sum, DecimalField
+from decimal import Decimal
 
 
 # Описание товаров в каталоге
@@ -48,7 +50,13 @@ class Cart(models.Model):
         verbose_name_plural = "Корзины"
 
     def total_price(self):
-        return sum(item.price for item in self.products.all())
+        subtotal = self.productincart_set.aggregate(
+            total=Sum(
+                F("quantity") * F("product__price"),
+                output_field=DecimalField(max_digits=12, decimal_places=2),
+            )
+        )["total"]
+        return subtotal or Decimal("0.00")
 
 
 class ProductInCart(models.Model):
@@ -81,7 +89,7 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = "Избранный товар"
         verbose_name_plural = "Избранные товары"
-        unique_together = ('user', 'product')
+        unique_together = ("user", "product")
 
     def __str__(self):
         return self.product.name
@@ -113,7 +121,7 @@ class Order(models.Model):
     phone = models.CharField(max_length=255, verbose_name="Контактный номер")
     email = models.EmailField(verbose_name="Email")
     status = models.CharField(
-        choices=choices, default="new", verbose_name="Статус заказа"
+        max_length=20, choices=choices, default="new", verbose_name="Статус заказа"
     )
     total_price = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="Итоговая стоимость"
