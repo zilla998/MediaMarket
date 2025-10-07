@@ -36,7 +36,7 @@
                 {% if orders %}
                   {% for order in orders %}
                     <div class="order-item mb-4">
-                      <h5>Заказ №{{ order.id }} от {{ order.create_at|date:"d.m.Y" }}</h5>
+                      <h5>Заказ №{{ order.id }} от {{ order.created_at|date:"d.m.Y" }}</h5>
                       <p>Статус: <span class="badge {% if order.status == 'new' %}bg-warning{% elif order.status == 'paid' %}bg-info{% elif order.status == 'sent' %}bg-primary{% elif order.status == 'done' %}bg-success{% else %}bg-danger{% endif %}">{{ order.get_status_display }}</span></p>
                       <p>Сумма заказа: {{ order.total_price }} руб.</p>
 

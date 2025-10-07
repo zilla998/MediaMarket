@@ -29,7 +29,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("pk", "name", "price", "in_stock", "create_at")
+    list_display = ("pk", "name", "price", "in_stock", "created_at")
 
 
 @admin.register(Category)
@@ -53,6 +53,6 @@ class OrderAdmin(admin.ModelAdmin):
         "email",
         "status",
         "total_price",
-        "create_at",
+        "created_at",
     )
     inlines = (ProductInOrderInlineModel,)

@@ -24,7 +24,7 @@ def user_profile(request, pk):
 @login_required
 def user_profile_orders(request, pk):
     user = CustomUser.objects.get(pk=pk)
-    orders = Order.objects.filter(user=user).order_by("-create_at")
+    orders = Order.objects.filter(user=user).order_by("-created_at")
     return render(
         request, "users/profile_orders.html", {"orders": orders, "user": user}
     )

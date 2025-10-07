@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Sum, DecimalField
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 from decimal import Decimal
 
 
@@ -14,7 +16,7 @@ class Product(models.Model):
         "Category", on_delete=models.CASCADE, verbose_name="Категория"
     )
     in_stock = models.BooleanField(default=True, verbose_name="В наличии")
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     class Meta:
         verbose_name = "Товар"
@@ -46,7 +48,7 @@ class Cart(models.Model):
     )
 
     class Meta:
-        verbose_name = "Корзины"
+        verbose_name = "Корзина"
         verbose_name_plural = "Корзины"
 
     def total_price(self):
@@ -126,7 +128,9 @@ class Order(models.Model):
     total_price = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="Итоговая стоимость"
     )
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name="Время оформления")
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="Время оформления"
+    )
 
     class Meta:
         verbose_name = "Заказ"
@@ -146,7 +150,7 @@ class ProductInOrder(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )
-    quantity = models.IntegerField(default=1, verbose_name="Кол-во")
+    quantity = models.PositiveIntegerField(default=1, verbose_name="Кол-во")
 
     class Meta:
         verbose_name = "Продукты в заказе"
@@ -164,9 +168,11 @@ class Review(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь"
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
-    rating = models.IntegerField(verbose_name="Рейтинг")
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)], verbose_name="Рейтинг"
+    )
     text = models.TextField(verbose_name="Текст отзыва")
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     class Meta:
         verbose_name = "Отзыв"

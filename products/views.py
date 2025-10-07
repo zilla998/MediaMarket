@@ -93,7 +93,7 @@ def category_sort(request):
     elif sort_param == "price_desc":
         products = products.order_by("-price")
     elif sort_param == "date":
-        products = products.order_by("-create_at")
+        products = products.order_by("-created_at")
 
     return render(request, "products/products_list.html", {"products": products})
 
@@ -312,7 +312,7 @@ def users_order(request):
         order.status = status[1]
         order.save()
 
-    orders = Order.objects.all().order_by("-create_at")
+    orders = Order.objects.all().order_by("-created_at")
 
     status = orders[0]._meta.get_field("status").choices
     cart = Cart.objects.get(user=request.user)
