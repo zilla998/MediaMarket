@@ -1,6 +1,6 @@
+import pytest
 from django.urls import reverse
 
-import pytest
 from fixtures.conftest import custom_user_factory
 
 

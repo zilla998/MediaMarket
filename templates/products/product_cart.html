@@ -10,7 +10,7 @@
             <h1 class="text-56-medium">Корзина</h1>
             <div class="breadcrumbs">
               <ul class="list-inline">
-                <li class="list-inline-item nav-link {% if view_name == 'products:homepage' %}active{% endif %}"> <a href="{% url 'products:homepage' %}">Главная </a></li>
+                <li class="list-inline-item nav-link {% if view_name == 'homepage' %}active{% endif %}"> <a href="{% url 'homepage' %}">Главная </a></li>
                 <li class="list-inline-item nav-link {% if view_name == 'products:products_list' %}active{% endif %}"> <a href="{% url 'products:products_list' %}">Каталог </a></li>
                 <li class="list-inline-item nav-link {% if view_name == 'products:product_cart' %}active{% endif %}"> <a href="{% url 'products:product_cart' %}">Корзина </a></li>
               </ul>

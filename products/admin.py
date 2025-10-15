@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 from products.models import (
-    Product,
+    Cart,
     Category,
     Favorite,
     Order,
-    Cart,
+    Product,
     ProductInCart,
     ProductInOrder,
 )

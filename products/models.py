@@ -1,16 +1,21 @@
-from django.conf import settings
-from django.db import models
-from django.db.models import F, Sum, DecimalField
-from django.core.validators import MaxValueValidator, MinValueValidator
-
 from decimal import Decimal
+
+from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.db.models import DecimalField, F, Sum
 
 
 # Описание товаров в каталоге
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
+    price = models.DecimalField(
+        max_digits=10,
+        validators=[MinValueValidator(Decimal("0.00"))],
+        decimal_places=2,
+        verbose_name="Цена",
+    )
     image = models.ImageField(upload_to="products_images/", verbose_name="Изображение")
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, verbose_name="Категория"
@@ -66,7 +71,7 @@ class ProductInCart(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name="Продукт"
     )
-    quantity = models.IntegerField(default=1, verbose_name="Кол-во товара")
+    quantity = models.PositiveIntegerField(default=1, verbose_name="Кол-во товара")
     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     class Meta:
@@ -97,7 +102,7 @@ class Favorite(models.Model):
         return self.product.name
 
     def favorite_count(self):
-        return Favorite.objects.filter(user=self.user).count()
+        return self.user.favorite_set.count()
 
 
 # Основная сущность заказа
@@ -144,7 +149,7 @@ class ProductInOrder(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
-        verbose_name="Корзина",
+        verbose_name="Заказ",
         related_name="order_items",
     )
     product = models.ForeignKey(

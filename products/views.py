@@ -1,22 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
-from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 from django.db import connection
-
+from django.dispatch import receiver
+from django.shortcuts import get_object_or_404, redirect, render
 
 from MediaMarket.settings import LOGIN_URL
+
 from .forms import OrderForm
-from .models import (
-    Product,
-    Favorite,
-    Cart,
-    ProductInCart,
-    ProductInOrder,
-    Order,
-)
+from .models import Cart, Favorite, Order, Product, ProductInCart, ProductInOrder
 
 
 @receiver(user_logged_in)
@@ -257,7 +248,7 @@ def product_checkout(request):
                     order=order, product=item.product, quantity=item.quantity
                 )
             cart.products.clear()
-            return redirect("products:homepage")
+            return redirect("homepage")
     else:
         data = {
             "full_name": request.user.get_full_name(),

@@ -115,7 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": (
             "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
         ),
-        "MESSAGE": "Ваш пароль не может быть слишком похож на вашу другую личную информацию.",
+        "MESSAGE": (
+            "Ваш пароль не может быть слишком похож на вашу другую личную информацию."
+        ),
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
