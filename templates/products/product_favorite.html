@@ -4,10 +4,9 @@
 {% block content %}
 {% with request.resolver_match.view_name as view_name %}
     <main class="main">
-      <section class="section block-banner-cart mb-4">
+      <section class="section block-banner-cart mb-4" style="padding-top: 120px;">
         <div class="row">
           <div class="col-12">
-            <h1 class="text-56-medium">{{ title }}</h1>
             <div class="breadcrumbs">
               <ul class="list-inline">
                 <li class="list-inline-item nav-link {% if view_name == 'homepage' %}active{% endif %}"> <a href="{% url 'homepage' %}">Главная </a></li>

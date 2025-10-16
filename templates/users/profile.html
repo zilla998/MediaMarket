@@ -2,14 +2,7 @@
 
 {% block content %}
     <main class="main">
-      <section class="section banner-500">
-        <div class="box-cover-image wow fadeInUp"></div>
-        <div class="box-banner-info wow bounceIn">
-          <p class="overline-t2-medium text-uppercase primary-navy mb-10">ЛИЧНЫЙ КАБИНЕТ</p>
-          <h2 class="color-primary-dark mb-30">Профиль пользователя<br class="d-none d-lg-block">{{ user.username }}</h2>
-        </div>
-      </section>
-      <section class="section block-content-customer">
+      <section class="section block-content-customer" style="padding-top: 120px;">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 wow bounceIn">
@@ -42,7 +35,11 @@
                     <p class="text-17-medium">{{ user.first_name }}</p>
                     <p class="text-17-medium">{{ user.last_name }}</p>
                     <p class="text-17-medium">{{ user.email }}</p>
-                    <p class="text-17-medium">{{ user.phone_number }}</p>
+                      {% if not user.phone %}
+                          <p>Не указан</p>
+                          {% else %}
+                    <p class="text-17-medium">{{ user.phone }}</p>
+                      {% endif %}
                   </div>
                 </div>
 

@@ -28,7 +28,7 @@ def test_product_in_order_creation(db, order, product):
 
 def test_order_str_method(db, order, product):
     order.products.add(product)
-    assert str(order) == f"Заказ №{order.id}"
+    assert str(order) == f"Заказ №{product.id} от {product.created_at.strftime('%d.%m.%Y')}"
 
 
 def test_product_in_order(db, order, product):

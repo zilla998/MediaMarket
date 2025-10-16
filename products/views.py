@@ -1,7 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.signals import user_logged_in
 from django.db import connection
-from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, redirect, render
 
 from MediaMarket.settings import LOGIN_URL
@@ -9,28 +7,6 @@ from MediaMarket.settings import LOGIN_URL
 from .forms import OrderForm
 from .models import Cart, Favorite, Order, Product, ProductInCart, ProductInOrder
 
-
-@receiver(user_logged_in)
-def transfer_cart_items(sender, user, request, **kwargs):
-    session_cart = request.session.get("cart", {})
-
-    if session_cart:
-        for product_id, quantity in session_cart.items():
-            try:
-                product = Product.objects.get(pk=product_id)
-                cart_item, created = ProductInCart.objects.get_or_create(
-                    user=user, product=product, defaults={"quantity": quantity}
-                )
-
-                if not created:
-                    cart_item.quantity += quantity
-                    cart_item.save()
-
-            except Product.DoesNotExist:
-                continue
-
-        request.session["cart"] = {}
-        request.session.modified = True
 
 
 def homepage(request):
@@ -220,6 +196,7 @@ def add_product_to_favorite(request, pk):
     return redirect(request.META.get("HTTP_REFERER", "products:products_list"))
 
 
+@login_required(login_url=LOGIN_URL)
 def remove_product_to_favorite(request, pk):
     if request.user.is_authenticated:
         Favorite.objects.filter(user=request.user, product_id=pk).delete()
@@ -233,67 +210,61 @@ def remove_product_to_favorite(request, pk):
     return redirect("products:favorite_product")
 
 
+@login_required(login_url=LOGIN_URL)
 def product_checkout(request):
+    if not request.user.is_authenticated:
+        return redirect(f"{LOGIN_URL}?next={request.path}")
+
+    cart = Cart.objects.get(user=request.user)
+    cart_items = ProductInCart.objects.filter(cart=cart)
+
+    if not cart_items.exists():
+        return redirect("products:product_cart")
+
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
-            cart = Cart.objects.get(user=request.user)
-            cart_items = ProductInCart.objects.filter(cart=cart)
             order = form.save(commit=False)
             order.user = request.user
             order.total_price = cart.total_price()
             order.save()
+
             for item in cart_items:
                 ProductInOrder.objects.create(
-                    order=order, product=item.product, quantity=item.quantity
+                    order=order,
+                    product=item.product,
+                    quantity=item.quantity
                 )
+
             cart.products.clear()
-            return redirect("homepage")
+            return redirect("products:products_list")
     else:
-        data = {
+        form = OrderForm(initial={
             "full_name": request.user.get_full_name(),
             "email": request.user.email,
             "address": request.user.address_default,
-        }
-        form = OrderForm(initial=data)
-    if request.user.is_authenticated:
-        cart = Cart.objects.get(user=request.user)
-        cart_items = ProductInCart.objects.filter(cart=cart)
-        total_price = 0
-        for cart_item in cart_items:
-            cart_item.total_price = cart_item.product.price * cart_item.quantity
-            total_price += cart_item.total_price
-    else:
-        cart_item = request.session.get("cart", {})
-        products = Product.objects.filter(pk__in=cart_item.keys())
-        cart_items = []
-        total_price = 0
-        for product in products:
-            product.total_price = product.price * cart_item[str(product.pk)]
-            total_price += product.total_price
-            cart_items.append(product)
+        })
+
+    total_price = 0
+    for item in cart_items:
+        item.total_price = item.product.price * item.quantity
+        total_price += item.total_price
 
     shipping_price = {"direct": 500, "pickup": 1000}
-
     shipping_type = request.GET.get("shipping")
-    print(shipping_type)
-    if shipping_type == "direct":
-        total_price += shipping_price["direct"]
-    if shipping_type == "pickup":
-        total_price += shipping_price["pickup"]
+    sub_total_price = total_price
 
-    return render(
-        request,
-        "products/product_checkout.html",
-        {
-            "title": "Оформление заказа",
-            "cart_items": cart_items,
-            "total_price": total_price,
-            "sub_total_price": total_price - shipping_price.get(shipping_type, 0),
-            "shipping_price": shipping_price,
-            "form": form,
-        },
-    )
+    if shipping_type in shipping_price:
+        total_price += shipping_price[shipping_type]
+
+    return render(request, "products/product_checkout.html", {
+        "title": "Оформление заказа",
+        "cart_items": cart_items,
+        "total_price": total_price,
+        "sub_total_price": sub_total_price,
+        "shipping_price": shipping_price,
+        "form": form,
+    })
 
 
 def users_order(request):

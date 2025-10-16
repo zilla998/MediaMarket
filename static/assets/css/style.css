@@ -1109,6 +1109,7 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .box-popup-search {
@@ -11574,6 +11575,7 @@ footer a {
 }
 .block-form-contact .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .accordion .accordion-item {

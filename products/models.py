@@ -171,6 +171,9 @@ class Order(models.Model):
             raise ValidationError("Адрес доставки не может быть пустым")
 
     def save(self, *args, **kwargs):
+        if self.pk and not self.order_items.exists():
+            raise ValidationError("Заказ должен содержать хотя бы один товар")
+
         super().save(*args, **kwargs)
 
 
