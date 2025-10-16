@@ -1,7 +1,8 @@
 from decimal import Decimal
 
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from django.db.models import DecimalField, F, Sum
 
@@ -26,9 +27,19 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+        indexes = [
+            models.Index(fields=['category']),
+            models.Index(fields=['created_at']),
+            models.Index(fields=['price']),
+            models.Index(fields=['in_stock']),
+        ]
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if not self.in_stock:
+            raise ValidationError("Товар отсутствует на складе")
 
 
 # Категории товаров
@@ -107,13 +118,16 @@ class Favorite(models.Model):
 
 # Основная сущность заказа
 class Order(models.Model):
-    choices = (
-        ("new", "Новый"),
-        ("paid", "Оплачен"),
-        ("sent", "Отправлен"),
-        ("done", "Выполнен"),
-        ("cancelled", "Отменен"),
+    phone_regex = RegexValidator(
+        regex=r'^(?:\+7|8)\d{10}$',
+        message="Введите номер телефона в формате +7XXXXXXXXXX или 8XXXXXXXXXX (11 цифр)."
     )
+    class OrderStatus(models.TextChoices):
+        NEW = "new", "Новый"
+        PAID = "paid", "Оплачен"
+        SENT = "sent", "Отправлен"
+        DONE = "done", "Выполнен"
+        CANCELLED = "cancelled", "Отменен"
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Заказчик"
     )
@@ -125,10 +139,10 @@ class Order(models.Model):
         verbose_name="Продукты",
     )
     address = models.CharField(max_length=255, verbose_name="Адрес доставки")
-    phone = models.CharField(max_length=255, verbose_name="Контактный номер")
+    phone = models.CharField(validators=[phone_regex], max_length=255, verbose_name="Контактный номер")
     email = models.EmailField(verbose_name="Email")
     status = models.CharField(
-        max_length=20, choices=choices, default="new", verbose_name="Статус заказа"
+        max_length=20, choices=OrderStatus.choices, default=OrderStatus.NEW, verbose_name="Статус заказа"
     )
     total_price = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="Итоговая стоимость"
@@ -140,9 +154,24 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+        indexes = [
+            models.Index(fields=['user']),
+            models.Index(fields=['status']),
+            models.Index(fields=['created_at']),
+            models.Index(fields=['user', 'status']),
+        ]
 
     def __str__(self):
-        return f"Заказ №{self.id}"
+        return f"Заказ №{self.id} от {self.created_at.strftime('%d.%m.%Y')}"
+
+    def clean(self):
+        if not self.full_name.strip():
+            raise ValidationError("ФИО не может быть пустым")
+        if not self.address.strip():
+            raise ValidationError("Адрес доставки не может быть пустым")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 
 class ProductInOrder(models.Model):
@@ -163,6 +192,14 @@ class ProductInOrder(models.Model):
 
     def __str__(self):
         return f"{self.product} - {self.quantity}"
+
+    def clean(self):
+        if not self.product.in_stock:
+            raise ValidationError(f"Товар '{self.product.name}' отсутствует на складе")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def total_product_price(self):
         return self.product.price * self.quantity
